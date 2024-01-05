@@ -1,0 +1,176 @@
+%% 
+%% Copyright 2007-2020 Elsevier Ltd
+%% 
+%% This file is part of the 'Elsarticle Bundle'.
+%% ---------------------------------------------
+%% 
+%% It may be distributed under the conditions of the LaTeX Project Public
+%% License, either version 1.2 of this license or (at your option) any
+%% later version.  The latest version of this license is in
+%%    http://www.latex-project.org/lppl.txt
+%% and version 1.2 or later is part of all distributions of LaTeX
+%% version 1999/12/01 or later.
+%% 
+%% The list of all files belonging to the 'Elsarticle Bundle' is
+%% given in the file `manifest.txt'.
+%% 
+
+%% Template article for Elsevier's document class `elsarticle'
+%% with numbered style bibliographic references
+%% SP 2008/03/01
+%%
+%% 
+%%
+%% $Id: elsarticle-template-num.tex 190 2020-11-23 11:12:32Z rishi $
+%%
+%%
+%\documentclass[preprint,12pt]{elsarticle}
+
+%% Use the option review to obtain double line spacing
+%% \documentclass[authoryear,preprint,review,12pt]{elsarticle}
+
+%% Use the options 1p,twocolumn; 3p; 3p,twocolumn; 5p; or 5p,twocolumn
+%% for a journal layout:
+%% \documentclass[final,1p,times]{elsarticle}
+%% \documentclass[final,1p,times,twocolumn]{elsarticle}
+%% \documentclass[final,3p,times]{elsarticle}
+%% \documentclass[final,3p,times,twocolumn]{elsarticle}
+%% \documentclass[final,5p,times]{elsarticle}
+ \documentclass[final,5p,times,twocolumn]{elsarticle}
+
+%% For including figures, graphicx.sty has been loaded in
+%% elsarticle.cls. If you prefer to use the old commands
+%% please give \usepackage{epsfig}
+
+%% The amssymb package provides various useful mathematical symbols
+\usepackage{amssymb}
+%% The amsthm package provides extended theorem environments
+%% \usepackage{amsthm}
+
+%% The lineno packages adds line numbers. Start line numbering with
+%% \begin{linenumbers}, end it with \end{linenumbers}. Or switch it on
+%% for the whole article with \linenumbers.
+%% \usepackage{lineno}
+
+\journal{Examples and Counterexamples}
+
+\begin{document}
+
+\begin{frontmatter}
+
+%% Title, authors and addresses
+
+%% use the tnoteref command within \title for footnotes;
+%% use the tnotetext command for theassociated footnote;
+%% use the fnref command within \author or \address for footnotes;
+%% use the fntext command for theassociated footnote;
+%% use the corref command within \author for corresponding author footnotes;
+%% use the cortext command for theassociated footnote;
+%% use the ead command for the email address,
+%% and the form \ead[url] for the home page:
+%% \title{Title\tnoteref{label1}}
+%% \tnotetext[label1]{}
+%% \author{Name\corref{cor1}\fnref{label2}}
+%% \ead{email address}
+%% \ead[url]{home page}
+%% \fntext[label2]{}
+%% \cortext[cor1]{}
+%% \affiliation{organization={},
+%%             addressline={},
+%%             city={},
+%%             postcode={},
+%%             state={},
+%%             country={}}
+%% \fntext[label3]{}
+
+\title{Automation of image processing through ML algorithms embedded in GRASS GIS}
+
+%% use optional labels to link authors explicitly to addresses:
+%% \author[label1,label2]{}
+%% \affiliation[label1]{organization={},
+%%             addressline={},
+%%             city={},
+%%             postcode={},
+%%             state={},
+%%             country={}}
+%%
+%% \affiliation[label2]{organization={},
+%%             addressline={},
+%%             city={},
+%%             postcode={},
+%%             state={},
+%%             country={}}
+
+\author{Polina Lemenkova}
+
+\affiliation{organization={Department of Geoinformatics, Faculty of Digital and Analytical Sciences, Universität Salzburg},%Department and Organization
+            addressline={Schillerstraße 30}, 
+            city={Salzburg},
+            postcode={A-5020}, 
+            country={Austria}}
+
+\begin{abstract}
+%% Text of abstract
+
+\end{abstract}
+
+%%Graphical abstract
+%\begin{graphicalabstract}
+%\includegraphics{grabs}
+%\end{graphicalabstract}
+
+%%Research highlights
+%\begin{highlights}
+%\item Research highlight 1
+%\item Research highlight 2
+%\end{highlights}
+
+\begin{keyword}
+%% keywords here, in the form: keyword \sep keyword
+
+%% PACS codes here, in the form: \PACS code \sep code
+
+%% MSC codes here, in the form: \MSC code \sep code
+%% or \MSC[2008] code \sep code (2000 is the default)
+
+\end{keyword}
+
+\end{frontmatter}
+
+%% \linenumbers
+
+%% main text
+%\section{}
+%\label{}
+
+%% The Appendices part is started with the command \appendix;
+%% appendix sections are then done as normal sections
+%% \appendix
+
+\section{Introduction}
+
+Machine learning (ML) in the remote sensing (RS) can be appleid using a variety of tools. Given that the Earth observation data are provided in large quantities as a big data concept \cite{LI2023103345,YIN2021102514,HUANG20181915}, diverse software and technical solutions provide approaches to process satellite images in the form of either programming libraries \cite{9884758,Lemenkova202306,9297369,9553880}, or embedded plugins and modules in the existing GIS software \cite{Lemenkova202307,rs15041148}. However, given that resolution and quality of images, as well as approaches of algorithms vary widely between programs, many users face the challenge of selecting optimal methods and may choose to switch between methods. Though not all Geographic Information System (GIS) software include the machine learning options in their toolsets for technical reasons (e.g., lack of fixed tools, awareness of options), the choice methods  for processing RS data depend on the opportunity to choose the available algorithms and solutions that best suits the needs of image processing, thus varying from either scripting libraries or combining GIS with programming in a chain of more diversified workflow \cite{5070195,Lemenkova202227,4736879,6049966,Lemenkova202301,6910592}.
+
+In order to achieve the objective of RS interpretation, that is to extract information from satellite images, these data should be processed using advanced computer-based techniques. In this case, the algorithms of RS data processing leverage diverse classification methods, to gain accurate labelling of the raster scenes \cite{su151813786,Lemenkova202229}. The approaches for this purpose are implemented by many well-known algorithms, including supervised and non-supervised classification, clustering, segmentation, semantic identification, image partition, and object based image analysis (OBIA), to mention a few. However, ML methods of image processing are not accessible to all GIS due to development constraints and the complexity of ML algorithms. Based on this, the choice of the ML methods is a practice that is not always available to the cartographers and that is utilised most often by the programmers.
+
+Considering the diversity of the ML approaches and their existent nuances that result in quality of image processing, the algorithms of image processing should be tested and compared. Rather, the choice of methods of RS data processing enables options that allow for algorithms to be used at either background tools or tuning steps for better image analysis and interpretation \cite{rs16010184,Lemenkova202310,rs16010127}. The expanded opportunity for cartographers to exercise choice in ML methods of RS data processing is argued to promote advancements in satellite image analysis by not only expanding the choices of methods for RS dataset processing but also stimulating higher quality of mapping and cartographic output \cite{TSELKA2023131,Lemenkova202021,10292983}. Hence, the ML methods facilitate mapping workflow through moving the priorities from technical issues of image processing to a deeper environmental analysis using these images. Such benefits are meant to operate through the selection of the optimal ML methods, thus creating opportunities and choice amongst the available tools of RS data processing \cite{WU2023110723}.
+
+The GIS that have included ML modules to select from perform better for image processing compared to simplified programs. Amongst the types of such available tools, Geographic Resources Analysis Support System (GRASS) GIS provides the options of ML for RS data processing that are based on the Python's library Scikit-Learn, such as, for instance, Random Forest (RF), Nearest Neighbors algorithms (KNeighborsClassifier), Stochastic Gradient Descent (SGD) learning classifier, linear classifiers that include Support Vector Machine (SVM), logistic regression and GradientBoostingClassifier. These options are not only intended to advance the image processing workflow using powerful tools of Python embedded in GRASS GIS thus ensuring the quality and accuracy of image classification but also use a variety of mathematical approaches that can be finely tuned to diverse purposes of image processing. While GRASS GIS also has a wide variety of traditional modules for processing vector and raster types of geospatial data, such as tools for geomorphological computations, hydrological modelling or analytical data visualisations, these options differ in that they predominantly adjusted to cartographic data using internal modules rather than Python algorithms.
+
+In contrast to the traditional approaches, the principal aspect of the ML consists in the application of the Artificial Intelligence (AI) paradigm. This novel method is based of the use of data-driven mathematical and statistical models which enable the machine to automatically learn from the input dataset and generate the output based on this learning which is performed in a real time regime, during the image processing workflow \cite{DOSSANTOS2022106753,ROCHA2022107415}. Hence, such approach specifically uses input information as a seed to learn complex patterns and relationships within the dataset. Moreover, given that research needs continuously change, the use of ML choice has been also flexibly adjusted to diverse applications to find patterns and links in datasets. For instance, the ML have been utilised to for precise forecasting \cite{LATIF202316}, predictive analysis in hazard risk assessment \cite{XIONG2021145256,WU2024103612}, geological mapping \cite{HAN202387}, hydrological modelling \cite{RAFIK2023101569,AOURAGH2023100939}, environmental assessment \cite{AMANI2023108324}, marine research \cite{ERDEM2021964} and evaluation of urban sprawl \cite{LI2023104653}. 
+
+The following sections provide an overview of the ML methods in cartographic works that were intended to serve as advanced algorithms for improved workflow of image processing, how these applications were successfully used for environmental monitoring and mapping, and how the choice of diverse ML instruments have driven their diverse applications for satellite image processing. The particular case of this work presents an example of the ML modules of GRASS GIS used to process the multispectral Landsat images for environmental monitoring of Liberia, West Africa.
+%% \label{}
+
+%% If you have bibdatabase file and want bibtex to generate the
+%% bibitems, please use
+%%
+\bibliographystyle{elsarticle-num} 
+\bibliography{Bibliography}
+
+%% else use the following coding to input the bibitems directly in the
+%% TeX file.
+\end{document}
+\endinput
+%%
+%% End of file `elsarticle-template-num.tex'.
