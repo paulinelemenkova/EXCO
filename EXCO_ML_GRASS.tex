@@ -166,7 +166,7 @@ In contrast to the traditional approaches, the principal aspect of the ML consis
 \section{Image processing}
 
 \subsection{Data}
-The algorithms of GRASS GIS were tested on the RS data presented by the Landsat-8 OLI-TIRS image covering western segment of the Nile Delta and the Faiyum Oasis, upper Egypt, Figure \ref{fig01}. 
+The algorithms of GRASS GIS were tested on the RS data presented by the Landsat 8-9 OLI-TIRS satellite images covering western segment of the Nile Delta and the Faiyum Oasis, upper Egypt in 2013 and 2023, Figure \ref{fig01}. 
 
 \begin{figure}[H]
   \centering
@@ -175,39 +175,23 @@ The algorithms of GRASS GIS were tested on the RS data presented by the Landsat-
     \small (a)
   \end{tabular}
   \begin{tabular}[b]{c}
-    \includegraphics[width=3.9cm]{Fig_01a.jpg} \\
+    \includegraphics[width=3.9cm]{Fig_01b.jpg} \\
     \small (b)
   \end{tabular}
-  \begin{tabular}[b]{c}
-    \includegraphics[width=3.9cm]{Fig_01a.jpg} \\
-    \small (c)
-     \end{tabular}
-    \begin{tabular}[b]{c}
-    \includegraphics[width=3.9cm]{Fig_01a.jpg} \\
-    \small (d)
-  \end{tabular}
-  \caption{Data source: Landsat-8 OLI/TIRS satellite image covering western segment of the Nile Delta and the 
-Faiyum Oasis, Egypt, with the examples of the colour composites. The image was created in GRASS GIS using triplets of the bands by employed 'r.composite' module: \textbf{(a)}: Original image in RGB; \textbf{(b)}: Bands 2-3-4; \textbf{(c)}: Bands 3-4-5; \textbf{(d)}: Bands 7-5-4.}
+  \caption{Data sources: Landsat 8-9 OLI/TIRS images on western Nile Delta and the Faiyum Oasis, Egypt: \textbf{(a)}: July 2013; \textbf{(b)}: July 2023.}
   \label{fig01}
 \end{figure}
 
-Technical characteristics of the Landsat-8 OLI/TIRS satellite image are as follows: Product Identifier L2: LC08\_L2SP\_177039\_20231126\_20231129\_02\_T1; L1: LC08\_L1TP\_177039\_20231126\_20231129\_02\_T1. The Landsat Scene Identifier is LC81770392023330LGN00. The data are provided by the USGS as open resource. The image was collected on 26 November 2023 with major metadata summarised in Table \ref{tab01}.
+Metadata of the Landsat OLI image are listed in Table \ref{tab01}.
 
 %\begin{table}[!ht]
 \begin{table}[H]
-\caption {Metadata of the satellite image Landsat-8 OLI/TIRS}
+\caption {Metadata of the satellite image Landsat-8 OLI/TIRS (2023)}
     \begin{center}
     \tiny
     \begin{tabular}{|l|l|l|l|}
     \hline
         	\textbf{Data Set Attribute} & \textbf{Attribute Value} & \textbf{Data Set Attribute} & \textbf{Attribute Value} \\ \hline
-        Collection Category & T1 & Sensor Identifier & OLI\_TIRS \\ \hline
-        Collection Number & 2 & Satellite & 8 \\ \hline
-        WRS Path & 177 & Product Map Projection L1 & UTM \\ \hline
-        WRS Row & 39 & UTM Zone & 36 \\ \hline
-        Target WRS Path & 177 & Datum & WGS84 \\ \hline
-        Target WRS Row & 39 & Ellipsoid & WGS84 \\ \hline
-        Nadir/Off Nadir & NADIR & Scene Center Lat DMS & "30°18'22.28""N" \\ \hline
         Roll Angle & -0.001 & Scene Center Long DMS & "30°22'30.94""E" \\ \hline
         Date Product Generated L2 & 2023/11/29 & Corner Upper Left Lat DMS & "31°20'30.77""N" \\ \hline
         Date Product Generated L1 & 2023/11/29 & Corner Upper Left Long DMS & "29°07'12.40""E" \\ \hline
@@ -226,32 +210,64 @@ Technical characteristics of the Landsat-8 OLI/TIRS satellite image are as follo
         Sun Elevation L0RA & 35.67135167 & Corner Lower Left Latitude & 29.20255 \\ \hline
         Sun Azimuth L0RA & 158.20257801 & Corner Lower Left Longitude & 29.20348 \\ \hline
         TIRS SSM Model & FINAL & Corner Lower Right Latitude & 29.24916 \\ \hline
-        Data Type L2 & OLI\_TIRS\_L2SP & Corner Lower Right Longitude & 31.60246 \\ \hline
+        Scene Center Lat DMS & "30°18'22.28""N" & Corner Lower Right Longitude & 31.60246 \\ \hline
     \end{tabular} \label{tab01}
     \end{center}
 \end{table}
 
+The data are provided by the USGS as open source repository from the Collection Number 2. The Landsat Scene Identifier (ID) of the Landsat 8 OLI/TIRS satellite image are as follows: image on 2023 is LC81770392023330LGN00. The row/path of the Landsat swath is 39/177 for both the scenes, collected in Nadir. The image collected on July 2021 has a Landsat Scene Identifier is LC91760392021307LGN03. The images were projected in the UTM Zone 36 for Egypt in WGS84 Ellipsoid.
+
 \subsection{Workflow}
 The GIS that have included ML modules to select from perform better for image processing compared to simplified programs. Amongst the types of such available tools, Geographic Resources Analysis Support System (GRASS) GIS provides the options of ML for RS data processing that are based on the Python's library Scikit-Learn, such as, for instance, Random Forest (RF), Nearest Neighbors algorithms (KNeighborsClassifier), Stochastic Gradient Descent (SGD) learning classifier, linear classifiers that include Support Vector Machine (SVM), logistic regression and GradientBoostingClassifier. These options are not only intended to advance the image processing workflow using powerful tools of Python embedded in GRASS GIS thus ensuring the quality and accuracy of image classification but also use a variety of mathematical approaches that can be finely tuned to diverse purposes of image processing. While GRASS GIS also has a wide variety of traditional modules for processing vector and raster types of geospatial data, such as tools for geomorphological computations, hydrological modelling or analytical data visualisations, these options differ in that they predominantly adjusted to cartographic data using internal modules rather than Python algorithms. 
 
-\subsection{Image Processing}
+\subsection{GaussianNB Classifier}
 
-\subsection{Image Processing}
+The Gaussian Naive Bayes (GaussianNB) Classifier is derived from the Scikit-Learn Library of Python and is generally based on the 
 
-\subsection{Image Processing}
+\subsection{MLPClassifier}
 
-\subsection{Image Processing}
+MLPClassifier is a Multi-layer Perceptron classifier derived from the Scikit-Learn Library of Python
+
+\subsection{SVC Classifier}
+
+The Support Vector Classification (SVC Classifier)
+
+\subsection{RandomForestClassifier}
+
+The RandomForestClassifier (RF Classifier)
 
 \section{Cartographic visualization}
 
 \begin{figure}[H]
   \centering
   \begin{tabular}[b]{c}
-    \includegraphics[width=3.9cm]{Fig_01a.jpg} \\
+    \includegraphics[width=3.9cm]{Fig_02a.jpg} \\
     \small (a)
   \end{tabular}
   \begin{tabular}[b]{c}
-    \includegraphics[width=3.9cm]{Fig_01a.jpg} \\
+    \includegraphics[width=3.9cm]{Fig_02b.jpg} \\
+    \small (b)
+  \end{tabular}
+  \begin{tabular}[b]{c}
+    \includegraphics[width=3.9cm]{Fig_02c.jpg} \\
+    \small (c)
+     \end{tabular}
+    \begin{tabular}[b]{c}
+    \includegraphics[width=3.9cm]{Fig_02d.jpg} \\
+    \small (d)
+  \end{tabular}
+  \caption{Automatic unsupervised classification using clustering and maximal likelihood approaches, and computed rejection probability classes by GRASS GIS: \textbf{(a)}: Classification 2013; \textbf{(b)}: Classification 2023; \textbf{(c)}: Accuracy assessment: 2013; \textbf{(d)}: Accuracy assessment: 2023.}
+  \label{fig02}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \begin{tabular}[b]{c}
+    \includegraphics[width=3.9cm]{Fig_03a.jpg} \\
+    \small (a)
+  \end{tabular}
+  \begin{tabular}[b]{c}
+    \includegraphics[width=3.9cm]{Fig_03b.jpg} \\
     \small (b)
   \end{tabular}
   \begin{tabular}[b]{c}
@@ -262,8 +278,8 @@ The GIS that have included ML modules to select from perform better for image pr
     \includegraphics[width=3.9cm]{Fig_01a.jpg} \\
     \small (d)
   \end{tabular}
-  \caption{Examples of different combinations of the created colour composites highlighting the Etosha Pan, Namibia. The images are generated based on triplets of Landsat 8-9 OLI/TIRS bands on 2022, using 'r.composite' module of GRASS GIS: \textbf{(a)}: March: Bands 7-5-3;\textbf{(b)}: March: Bands 2-3-4; \textbf{(c)}: March: Bands 3-4-5; \textbf{(d)}: April: Bands 7-5-4.}
-  \label{fig01}
+  \caption{Results of the ML-based supervised classification using four different models by GRASS GIS module 'r.learn.train ': \textbf{(a)}: --;\textbf{(b)}: --; \textbf{(c)}: --; \textbf{(d)}: --.}
+  \label{fig03}
 \end{figure}
 
 \section{Conclusion}
