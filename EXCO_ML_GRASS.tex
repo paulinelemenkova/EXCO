@@ -43,16 +43,15 @@
 %% please give \usepackage{epsfig}
 
 %% The amssymb package provides various useful mathematical symbols
+\usepackage{amsmath}
 \usepackage{amssymb}
+\usepackage{amsfonts}
 \graphicspath{{figures/}} % path to folder with figures
 \usepackage{float}
 \usepackage{array}
 \usepackage{xcolor}
-
-%%FOR MATH
-\usepackage{amsthm}
-\usepackage{amsmath}
-\usepackage{amsfonts}
+\usepackage{chngcntr}
+\counterwithin*{equation}{section}
 
 %% The lineno packages adds line numbers. Start line numbering with
 %% \begin{linenumbers}, end it with \end{linenumbers}. Or switch it on
@@ -62,6 +61,8 @@
 \journal{Examples and Counterexamples}
 
 \begin{document}
+
+\setcounter{equation}{0}
 
 \begin{frontmatter}
 
@@ -92,22 +93,6 @@
 
 \title{Automation of image processing through ML algorithms embedded in GRASS GIS}
 
-%% use optional labels to link authors explicitly to addresses:
-%% \author[label1,label2]{}
-%% \affiliation[label1]{organization={},
-%%             addressline={},
-%%             city={},
-%%             postcode={},
-%%             state={},
-%%             country={}}
-%%
-%% \affiliation[label2]{organization={},
-%%             addressline={},
-%%             city={},
-%%             postcode={},
-%%             state={},
-%%             country={}}
-
 \author{Polina Lemenkova}
 
 \affiliation{organization={Department of Geoinformatics, Faculty of Digital and Analytical Sciences, Universität Salzburg},
@@ -123,17 +108,6 @@ Machine learning (ML) is increasingly used in Earth science for automatic proces
 
 \end{abstract}
 
-%%Graphical abstract
-%\begin{graphicalabstract}
-%\includegraphics{grabs}
-%\end{graphicalabstract}
-
-%%Research highlights
-%\begin{highlights}
-%\item Research highlight 1
-%\item Research highlight 2
-%\end{highlights}
-
 \begin{keyword}
 
 geoinformation \sep machine learning \sep cartography \sep remote sensing \sep satellite image \sep image processing \sep programming \sep scripting language \sep automation \sep geospatial analysis
@@ -145,12 +119,6 @@ geoinformation \sep machine learning \sep cartography \sep remote sensing \sep s
 \end{keyword}
 
 \end{frontmatter}
-
-\linenumbers
-
-%% main text
-%\section{}
-%\label{}
 
 \section{Introduction}
 
@@ -181,51 +149,34 @@ The algorithms of GRASS GIS were tested on the RS data presented by the Landsat 
   \label{fig01}
 \end{figure}
 
-Metadata of the Landsat OLI image are listed in Table \ref{tab01}.
-
-%\begin{table}[!ht]
-\begin{table}[H]
-\caption {Metadata of the satellite image Landsat-8 OLI/TIRS (2023)}
-    \begin{center}
-    \tiny
-    \begin{tabular}{|l|l|l|l|}
-    \hline
-        	\textbf{Data Set Attribute} & \textbf{Attribute Value} & \textbf{Data Set Attribute} & \textbf{Attribute Value} \\ \hline
-        Roll Angle & -0.001 & Scene Center Long DMS & "30°22'30.94""E" \\ \hline
-        Date Product Generated L2 & 2023/11/29 & Corner Upper Left Lat DMS & "31°20'30.77""N" \\ \hline
-        Date Product Generated L1 & 2023/11/29 & Corner Upper Left Long DMS & "29°07'12.40""E" \\ \hline
-        Start Time & 2023-11-26 08:30:01 & Corner Upper Right Lat DMS & "31°23'33.50""N" \\ \hline
-        Stop Time & 2023-11-26 08:30:33 & Corner Upper Right Long DMS & "31°34'18.08""E" \\ \hline
-        Station Identifier & LGN & Corner Lower Left Lat DMS & "29°12'09.18""N" \\ \hline
-        Day/Night Indicator & DAY & Corner Lower Left Long DMS & "29°12'12.53""E" \\ \hline
-        Land Cloud Cover & 1.09 & Corner Lower Right Lat DMS & "29°14'56.98""N" \\ \hline
-        Scene Cloud Cover L1 & 1.07 & Corner Lower Right Long DMS & "31°36'08.86""E" \\ \hline
-        Ground Control Points Model & 654 & Scene Center Latitude & 30.30619 \\ \hline
-        Ground Control Points Version & 5 & Scene Center Longitude & 30.37526 \\ \hline
-        Geometric RMSE Model & 7.445 & Corner Upper Left Latitude & 31.34188 \\ \hline
-        Geometric RMSE Model X & 4.845 & Corner Upper Left Longitude & 29.12011 \\ \hline
-        Geometric RMSE Model Y & 5.653 & Corner Upper Right Latitude & 31.39264 \\ \hline
-        Processing Software Version & LPGS\_16.3.1 & Corner Upper Right Longitude & 31.57169 \\ \hline
-        Sun Elevation L0RA & 35.67135167 & Corner Lower Left Latitude & 29.20255 \\ \hline
-        Sun Azimuth L0RA & 158.20257801 & Corner Lower Left Longitude & 29.20348 \\ \hline
-        TIRS SSM Model & FINAL & Corner Lower Right Latitude & 29.24916 \\ \hline
-        Scene Center Lat DMS & "30°18'22.28""N" & Corner Lower Right Longitude & 31.60246 \\ \hline
-    \end{tabular} \label{tab01}
-    \end{center}
-\end{table}
-
 The data are provided by the USGS as open source repository from the Collection Number 2. The Landsat Scene Identifier (ID) of the Landsat 8 OLI/TIRS satellite image are as follows: image on 2023 is LC81770392023330LGN00. The row/path of the Landsat swath is 39/177 for both the scenes, collected in Nadir. The image collected on July 2021 has a Landsat Scene Identifier is LC91760392021307LGN03. The images were projected in the UTM Zone 36 for Egypt in WGS84 Ellipsoid.
 
 \subsection{Workflow}
 The GIS that have included ML modules to select from perform better for image processing compared to simplified programs. Amongst the types of such available tools, Geographic Resources Analysis Support System (GRASS) GIS provides the options of ML for RS data processing that are based on the Python's library Scikit-Learn \cite{scikitlearn}, such as, for instance, Random Forest (RF), Nearest Neighbors algorithms (KNeighborsClassifier), Stochastic Gradient Descent (SGD) learning classifier, linear classifiers that include Support Vector Machine (SVM), logistic regression and GradientBoostingClassifier. These options are not only intended to advance the image processing workflow using powerful tools of Python embedded in GRASS GIS thus ensuring the quality and accuracy of image classification but also use a variety of mathematical approaches that can be finely tuned to diverse purposes of image processing. While GRASS GIS also has a wide variety of traditional modules for processing vector and raster types of geospatial data, such as tools for geomorphological computations, hydrological modelling or analytical data visualisations, these options differ in that they predominantly adjusted to cartographic data using internal modules rather than Python algorithms. 
 
+\subsection{Maximum Likelihood}
+While maximum likelihood (MaxLike) estimation mostly pursue statistical and evaluation goals, the advent of this method which aims at the estimating the probability distribution in dataset have created opportunities to the pursuit of satellite image processing. Thus, the MaxLike method enables a straightforward approach to partition of pixels into groups using clusters of cells with similar spectral reflectance within the observed dataset. This method is employed in GRASS GIS using 'i.cluster' and 'i.maxlik' modules. The numerical results of the classification are stored using 'reportfile' function which contains statistical parameters of cluster classes: class size, separation, percent convergence, number of iterations, means and standard deviations for Landsat bands and class separability matrix. The results of the MaxLike unsupervised classification were employed as seed training dataset for ML algorithms in the following steps. The classification for 2013 reported 98.26\% points stable in 10 classes; the classification for 2013 reported 98.01\% points stable points stable.
+
 \subsection{GaussianNB Classifier}
 
-The Gaussian Naive Bayes (GaussianNB) Classifier is derived from the Scikit-Learn Library of Python and is generally based on the 
+The Gaussian Naive Bayes (GaussianNB) Classifier is derived from the Scikit-Learn Library of Python and is generally based on the supervised learning algorithm which implies the probabilistic approach and normal Gaussian distribution of the data. More specifically, it computes the likelihood of the features using the Bayes' theorem which assumes the independence between every pair of pixels on a raster image according to Gaussian distribution and considers the value of cells assigned to each class as variables. The likelihood of the pixels assigned to each land cover class during image partition is assumed to be Gaussian according to the Equation \ref{eq1}:
 
+\begin{equation}
+P(x_{i} | y)=\frac{1}{\sqrt{2\pi\sigma^2_y}}exp\biggl( -\frac{(x_{i}-\mu_{y})^2}{2\sigma^2_y}\biggr)
+\label{eq1}
+\end{equation}
+
+where the parameters $\sigma_y$ and $\mu_y$  are computed using the approach of maximum likelihood.
 \subsection{MLPClassifier}
 
-MLPClassifier is a Multi-layer Perceptron classifier derived from the Scikit-Learn Library of Python and is based on fundamentals of predictive learning \cite{Rosenblatt}. The essential approach of this algorithms consists in random selection of the hidden nodes and analytical determination of the output weights of neural networks \cite{HUANG2006489}. The algorithms ensures high generalisation output at fast learning speed. 
+MLPClassifier is a Multi-layer Perceptron classifier derived from the Scikit-Learn Library of Python and is based on fundamentals of predictive learning \cite{Rosenblatt}. The performance of the MLPC differs from the previous approach since it uses the principle of feedforward Artificial Neural Network (ANN). For data analysis, ANN uses three layers of nonlinearly-activating nodes -- input, hidden and output layer -- as a flow of information for data partition. The principal process of the supervised earning in the MLPClassifier is based on the iterative evaluation of changing connection weights after each pixel is evaluated, based on the estimated error until the output image is approached to the expected result. The mathematical background of this process can be formulated in Equation \ref{eq2} as a foundation: 
+
+\begin{equation}
+P(x_{i} | y)=\frac{1}{\sqrt{2\pi\sigma^2_y}}exp\biggl( -\frac{(x_{i}-\mu_{y})^2}{2\sigma^2_y}\biggr)
+\label{eq2}
+\end{equation}
+
+The MLPC algorithm is sensitive to feature scaling which is related to the resolution of the original raster image. The essential approach of this algorithms consists in random selection of the hidden nodes and analytical determination of the output weights of neural networks \cite{HUANG2006489}. As a result, the MLPClassifier algorithm ensures higher generalisation output at a faster learning speed. 
 
 \subsection{SVC Classifier}
 
@@ -278,7 +229,7 @@ The RandomForestClassifier (RF Classifier) initially developed by Tin Kam Ho in 
     \includegraphics[width=3.9cm]{Fig_03d.jpg} \\
     \small (d)
   \end{tabular}
-  \caption{Supervised ML-based classification using four different models by GRASS GIS module 'r.learn.train ': \textbf{(a)}: GaussianNB Classifier;\textbf{(b)}: MLP Classifier; \textbf{(c)}: SVC Classifier; \textbf{(d)}: Random Forest Classifier.}
+  \caption{Supervised ML-based classification using four different models by GRASS GIS module 'r.learn.train ': \textbf{(a)}: GaussianNB Classifier; \textbf{(b)}: MLP Classifier; \textbf{(c)}: SVC Classifier; \textbf{(d)}: Random Forest Classifier.}
   \label{fig03}
 \end{figure}
 
