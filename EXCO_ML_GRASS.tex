@@ -256,13 +256,25 @@ Hence, the MLPC algorithm is sensitive to feature scaling which is related to th
 
 \subsection{SVC Classifier}
 
-The Support Vector Classification (SVC Classifier) \cite{Cortes}
+The Support Vector Classification (SVC Classifier) is a branch of the Support vector machines (SVM) which are a set of supervised learning methods \cite{Cortes}. The main approach of the SVM is classifying the new data into one or two given classes using the decision process which tracks the largest separation, i.e., margin, between the given classes. Hence, the a best separation is obtain using the discrimination of the location of the samples within the finite-dimensional space of dataset, and detected largest distance to the nearest training sample of one of these classes. 
+
+When SVC uses training vectors, that is, the sample pixels that are located within the margin of classes,
+$x_{i} \in R^p$ where $ i=1 \dots n$ as two classes and a vector $y \in \{1, - 1\}^n$, it aims to find the $w \in R^p$ and $b \in R$ so that the assignment of pixels to correct land cover class is true for most samples. The formulated problem is expressed in Equation \ref{eq4}:
 
 \begin{equation}
-P(x_{i} | y)=\frac{1}{\sqrt{2\pi\sigma^2_y}}exp\biggl( -\frac{(x_{i}-\mu_{y})^2}{2\sigma^2_y}\biggr)
-\label{eq3}
+\min_{\omega,b,\zeta}\frac{1}{2}\omega^T\omega+C\sum_{i=n}^{n}\zeta_{i}
+\label{eq4}
 \end{equation}
 
+which depends on the conditions in the definitions of $y_{i}(\omega^{T}\varphi (x_i) + b)\geq 1-\zeta_{i}$ which should ideally be greater than one for the optimal prediction of the correctly classified pixels on a raster scene, and $\zeta_{i}\geq 0, i = 1,\dots,n$. The SVC solves this problem through the maximisation of margins of the sample classes by analysing the Digital Numbers (DN) of pixels on the raster image and inverse regularisation parameter. After the optimisation of the raster dataset using iterative analysis, the estimated decision function in a classified matrix consisting of cells for a sample of $x$ pixels corresponds to the Equation \ref{eq5}:
+
+\begin{equation}
+\sum_{i\in SV}y_{i}\alpha_{i}K(x_{i},x) + b
+\label{eq5}
+\end{equation}
+
+The resulting output of the classification assigns the predicted class to its sign and the support vectors are summarised using attributes of the classification. Such effective approach has a memory-efficient performance since it utilises a set of training points as decision function, i.e., support vectors which optimises the use of computational facilities of the machine. Moreover, the flexibility of this algorithms is caused by the possibility to adjust the model using different Kernel functions defined which includes both common and custom kernels. 
+ 
 \subsection{RandomForestClassifier}
 
 The RandomForestClassifier (RF Classifier) initially developed by Tin Kam Ho in 1995 \cite{598994} became a well established method of data complexity analysis among ML algorithms \cite{990132}.
@@ -273,7 +285,7 @@ P(x_{i} | y)=\frac{1}{\sqrt{2\pi\sigma^2_y}}exp\biggl( -\frac{(x_{i}-\mu_{y})^2}
 \end{equation}
 
 \subsection{Cartographic visualization}
-The cartographic visualization of the images processed with four methods is presented in Figure \ref{fig03}.
+The cartographic visualization of the images processed with four methods is presented in Figure \ref{fig03}. The land cover types in the northern Egypt were identified as the following 10 classes according to the landscape types around the Nile Delta and Faiyum Oasis:  1) urban areas, 2) agricultural fields, 3) water areas in the Nile river and Mediterranean Sea, 4) coastal shelf zones, 5) consolidated base lands and soils; 6) sandy areas in the desert; 7) natural vegetation in the non-urban areas; 8) croplands; 9) salt; 10) sabkha.  
 
 \begin{figure}[H]
   \centering
@@ -296,6 +308,10 @@ The cartographic visualization of the images processed with four methods is pres
   \caption{Supervised ML-based classification using four different models by GRASS GIS module 'r.learn.train ': \textbf{(a)}: GaussianNB Classifier; \textbf{(b)}: MLP Classifier; \textbf{(c)}: SVC Classifier; \textbf{(d)}: Random Forest Classifier.}
   \label{fig03}
 \end{figure}
+
+Among the compared outputs, the MLP Classifier differs from the other approaches, while Random Forest and SVM Classifier presented similar maps based on the processed images using ML approach of GRASS GIS using Python libraries. 
+
+The superiority of SVM over other methods can be explained by its effectivity in high dimensional datasets which is valuable for satellite images that consists thousands of pixels as cells. In our case, 61,405,182 cells were classified automatically for each band of multispectral Landsat 8-9 OLI/TIRS images with 30-m resolution where each raster image contained 7911 rows and 7762 columns of cells. More specifically, the SVM presents high search accuracy compared to other algorithms after a few iterations. Besides, using SVM is supportive for time series analysis where several satellite images are compared since this method is effective when number of dimensions is larger than samples. This is particular valuable for detecting complex land cover patterns in the regions with high heterogeneity of landscapes, such as mixed areas with urban areas and natural spaces. 
 
 \section{Conclusion}
 
