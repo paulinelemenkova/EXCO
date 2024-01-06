@@ -54,6 +54,7 @@
 \usepackage{chngcntr}
 \counterwithin*{equation}{section}
 \usepackage[super]{nth}
+\usepackage{lineno}
 
 %% The lineno packages adds line numbers. Start line numbering with
 %% \begin{linenumbers}, end it with \end{linenumbers}. Or switch it on
@@ -63,7 +64,7 @@
 \journal{Examples and Counterexamples}
 
 \begin{document}
-
+\linenumbers
 \setcounter{equation}{0}
 
 \begin{frontmatter}
@@ -93,7 +94,7 @@
 %%             country={}}
 %% \fntext[label3]{}
 
-\title{Automation of image processing through ML algorithms embedded in GRASS GIS}
+\title{Automation of image processing through ML algorithms of GRASS GIS using embedded Scikit-Learn library of Python}
 
 \author{Polina Lemenkova}
 
@@ -298,7 +299,7 @@ The cartographic visualization of the images processed with four methods is pres
 
 \section{Conclusion}
 
-This work demonstrated the supervised training in ML approaches provide using GRASS GIS as examples of the ML methods in cartographic works. The research tested several advanced algorithms of image classification for improved workflow of image processing. Moreover, the paper demonstrated how these applications can be successfully used for environmental monitoring and mapping, and how the choice of diverse ML instruments have driven their diverse outcomes of satellite image processing. The particular case of this work presented an example of the ML modules of GRASS GIS used to process the multispectral Landsat images for environmental monitoring of Liberia, West Africa.
+This work demonstrated the examples of the supervised training in ML approaches to geospatial applications. Four algorithms of ML supervised training were compared using GRASS GIS modules that are based on Python's library Scikit-Learn to test the applicability of these methods in the cartographic works. The research tested several advanced algorithms of image classification for improved workflow of image processing. The paper demonstrated how these applications can be used for environmental monitoring and mapping, and how the choice of diverse ML instruments have driven their diverse outcomes of satellite image processing. The particular case of this work presented an example of the ML modules of GRASS GIS used to process the multispectral Landsat images for visualization of landscapes using image partition into 10 land cover classes automatically. The mapping example illustrates the region of western segment of Nile Delta and the Faiyum Oasis, upper Egypt.
 
 %% The Appendices part is started with the command \appendix;
 %% appendix sections are then done as normal sections
