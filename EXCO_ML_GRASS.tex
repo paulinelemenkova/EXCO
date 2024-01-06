@@ -43,15 +43,17 @@
 %% please give \usepackage{epsfig}
 
 %% The amssymb package provides various useful mathematical symbols
-\usepackage{amsmath}
+\usepackage{amsmath,mathtools,amsthm}
+	\setcounter{MaxMatrixCols}{15}
+\usepackage{array}
 \usepackage{amssymb}
 \usepackage{amsfonts}
 \graphicspath{{figures/}} % path to folder with figures
 \usepackage{float}
-\usepackage{array}
 \usepackage{xcolor}
 \usepackage{chngcntr}
 \counterwithin*{equation}{section}
+\usepackage[super]{nth}
 
 %% The lineno packages adds line numbers. Start line numbering with
 %% \begin{linenumbers}, end it with \end{linenumbers}. Or switch it on
@@ -179,7 +181,42 @@ While maximum likelihood (MaxLike) estimation mostly pursue statistical and eval
   \label{fig02}
 \end{figure}
 
-The numerical results of the classification are stored using 'reportfile' function which contains statistical parameters of cluster classes: class size, separation, percent convergence, number of iterations, means and standard deviations for Landsat bands and class separability matrix. The results of the MaxLike unsupervised classification were employed as seed training dataset for ML algorithms in the following steps. The classification for 2013 reported 98.26\% points stable in 10 classes; the classification for 2013 reported 98.01\% points stable points stable.
+The numerical results of the classification are stored using 'reportfile' function which contains statistical parameters of cluster classes: class size, separation, percent convergence, number of iterations, means and standard deviations for Landsat bands and class separability matrix. 
+
+The results of the MaxLike unsupervised classification were employed as seed training dataset for ML algorithms in the following steps. The classification for 2013 reported 98.26\% points stable in 10 classes; the classification for 2013 reported 98.01\% points stable points stable. The computed class separability matrix for 10 classes of land cover types identified on the image on 2013 is given in matrix block below:  
+
+\[
+\begin{matrix}
+    & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 \\
+1 & 0 &  &  &  &  &  &  &  &  &  \\
+2 & 1.8 & 0 &  &  &  &  &  &  &  &  \\
+3 & 2.6 & 1.7 & 0 &  &  &  &  &  &  &  \\
+4 & 2.4 & 1.0 & 1.0 & 0 &  &  &  &  &  &  \\
+5 & 3.7 & 2.8 & 1.0 & 1.7 & 0 &  &  &  &  &  \\
+6 & 5.0 & 4.3 & 2.2 & 2.9 & 1.2 & 0 &  &  &  &  \\
+7 & 6.9 & 6.3 & 3.6 & 4.4 & 2.5 & 1.3 & 0 &  &  &  \\
+8 & 8.9 & 8.3 & 4.9 & 5.7 & 3.6 & 2.3 & 1.0 & 0 &  &  \\
+9 & 10.0 & 9.4 & 5.6 & 6.4 & 4.4 & 3.0 & 1.8 & 1.0 & 0 &  \\
+10 & 8.6 & 8.1 & 5.4 & 6.0 & 4.4 & 3.3 & 2.4 & 1.9 & 1.2 & 0 \\              
+\end{matrix}
+\]
+
+Accordingly, the computed class separability matrix for 10 classes of the land cover types recognised in image on 2023 is given in matrix block below:  
+\[
+\begin{matrix}
+    & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 \\
+1 & 0 &  &  &  &  &  &  &  &  &  \\
+2 & 1.8 & 0 &  &  &  &  &  &  &  &  \\
+3 & 2.8 & 1.8 & 0 &  &  &  &  &  &  &  \\
+4 & 2.6 & 1.0 & 1.1 & 0 &  &  &  &  &  &  \\
+5 & 3.9 & 2.7 & 0.9 & 1.6 & 0 &  &  &  &  &  \\          
+6 & 4.9 & 4.0 & 1.9 & 2.8 & 1.1 & 0 &  &  &  &  \\   
+7 & 6.8 & 5.9 & 3.2 & 4.2 & 2.3 & 1.1 & 0 &  &  &  \\  
+8 & 9.0 & 8.1 & 4.5 & 5.8 & 3.6 & 2.3 & 1.1 & 0 &  &  \\
+9 & 10.0 & 9.1 & 5.3 & 6.5 & 4.4 & 3.0 & 2.0 & 1.0 & 0 &  \\   
+10 & 8.3 & 7.5 & 4.9 & 5.8 & 4.2 & 3.2 & 2.4 & 1.8 & 1.1 & 0 \\      
+\end{matrix}
+\]
 
 \subsection{GaussianNB Classifier}
 
@@ -192,20 +229,29 @@ P(x_{i} | y)=\frac{1}{\sqrt{2\pi\sigma^2_y}}exp\biggl( -\frac{(x_{i}-\mu_{y})^2}
 
 where the parameters $\sigma_y$ and $\mu_y$  are computed using the approach of maximum likelihood.
 
-Thus, the algorithm of GaussianNB Classifier computes the likelihood of the features using the Bayes' theorem which assumes the independence between every pair of pixels on a raster image according to Gaussian distribution and considers the value of cells assigned to each class as variables. 
+Thus, the algorithm of GaussianNB Classifier computes the likelihood of the features using the Bayes' theorem which assumes the independence between every pair of pixels according to Gaussian distribution and considers the value of cells assigned to each class of the classified satellite image as variables. 
 
 \subsection{MLPClassifier}
 
-MLPClassifier is a Multi-layer Perceptron classifier derived from the Scikit-Learn Library of Python and is based on fundamentals of predictive learning \cite{Rosenblatt}. The performance of the MLPC differs from the previous approach since it uses the principle of feedforward Artificial Neural Network (ANN). 
+MLPClassifier is a Multi-layer Perceptron classifier derived from the Scikit-Learn Library of Python and is based on fundamentals of predictive learning \cite{Rosenblatt}. The performance of the MLPC differs from the GaussianNB approach since it uses the principle of feedforward Artificial Neural Network (ANN). For data analysis, ANN uses three layers that are used as structures of network topology in a flow of information for data partition. The input, hidden and output layer consist of nodes (i.e., pixels of raster layer) which train the model using supervised learning. 
 
-For data analysis, ANN uses three layers of nonlinearly-activating nodes -- input, hidden and output layer -- as a flow of information for data partition. The principal process of the supervised earning in the MLPClassifier is based on the iterative evaluation of changing connection weights after each pixel is evaluated, based on the estimated error until the output image is approached to the expected result. The mathematical background of this process can be formulated in Equation \ref{eq2} as a foundation: 
+The principal approach of this process consists in the connection between each node in one layer to those in the following layer through a certain weight ($w_{ij}$). MLPClassifier iteratively evaluates the training data using these connections in weights of the evaluated pixels. The algorithm changes weights repetitively using estimated error until the output image is approached to the expected result and the error is minimised. This sequential operation is formulated in Equation \ref{eq2}: 
 
 \begin{equation}
-P(x_{i} | y)=\frac{1}{\sqrt{2\pi\sigma^2_y}}exp\biggl( -\frac{(x_{i}-\mu_{y})^2}{2\sigma^2_y}\biggr)
+\varepsilon(n)=\frac{1}{2} \sum_{output node j}{e_{j}^2(n)}
 \label{eq2}
 \end{equation}
 
-The MLPC algorithm is sensitive to feature scaling which is related to the resolution of the original raster image. The essential approach of this algorithms consists in random selection of the hidden nodes and analytical determination of the output weights of neural networks \cite{HUANG2006489}. As a result, the MLPClassifier algorithm ensures higher generalisation output at a faster learning speed. 
+where $e_j(n)$ is the degree of error in an output node $j$ in the n$^{th}$  pixel of the raster dataset and $\varepsilon(n)$ is the node weights which are iteratively adjusted using the minimisation of the errors in the classified raster image for the n$^{th}$ pixel of the raster matrix. Using optimization, each weight $w_{ij}$ is estimated iteratively and changed accordingly using Equation \ref{eq3}: 
+
+\begin{equation}
+\Delta w_{ji}(n)=-\eta\frac{\vartheta\epsilon(n)}{\vartheta\upsilon_{j}(n)}y_{i}(n)
+\label{eq3}
+\end{equation}
+
+where $y_{i}(n)$ is the result of the previous step of classification, and $\eta$ is the tuning parameter of optimization, which aims at quick convergence of the weights of pixels during the iterative process of image classification.
+
+Hence, the MLPC algorithm is sensitive to feature scaling which is related to the resolution of the original raster image. The essential approach of this algorithms consists in random selection of the hidden nodes and analytical determination of the output weights of neural networks \cite{HUANG2006489}. As a result, the MLPClassifier algorithm ensures higher generalisation output at a faster learning speed. 
 
 \subsection{SVC Classifier}
 
