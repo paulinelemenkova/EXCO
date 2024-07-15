@@ -104,6 +104,12 @@
             postcode={A-5020}, 
             country={Austria}
           }
+\affiliation{organization={Department of Biological, Geological and Environmental Sciences, Alma Mater Studiorum -- Università di Bologna},
+            addressline={Via Irnerio 42}, 
+            city={Bologna},
+            postcode={IT-40126, Emilia-Romagna}, 
+            country={Italy}
+          }
 
 \begin{abstract}
 Image processing using Machine Learning (ML) and Artificial Neural Network (ANN) methods was investigated by employing the algorithms of GRASS GIS with embedded Scikit-Learn library of Python. The data are obtained from the USGS and include the Landsat 8-9 OLI/TIRS satellite images on 2013 and 2023 covering Nile Delta and the Faiyum Oasis, Egypt. Operating the workflow of image processing, to process the satellite images into raster maps presenting the land cover types over the tested study area was implemented by using a set of modules in scripting language of GRASS GIS. These include 'i.cluster' and 'i.maxlik' for non-supervised classification used as training dataset of random pixel seeds, 'r.random', 'r.learn.train', 'r.learn.predict' and 'r.category' for ML part of image processing. The consequences of various ML parameters on the cartographic outputs are analysed, such as speed and accuracy, randomness of nodes, analytical determination of the output weights, and dependence distribution of pixels for each algorithm. Supervised learning models of GRASS GIS were tested and compared including the Gaussian Naive Bayes (GaussianNB), Multi-layer Perceptron classifier (MLPClassifier), Support Vector Machines (SVM) Classifier, and RandomForestClassifier (RF). Though each algorithms was developed to serve different objectives of ML applications in RS data processing, their technical implementation and practical purposes present valuable approaches to cartographic data processing and image analysis. The results shown that the most time-consuming algorithms was noted as SVC classification, while the fastest results were achieved by the GaussianNB approach to image processing and the best results are achieved by RF Classifier.
