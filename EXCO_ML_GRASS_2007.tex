@@ -225,7 +225,7 @@ The numerical results of the classification are stored using 'reportfile' functi
 
 \subsection{GaussianNB Classifier}
 
-The Gaussian Naive Bayes (GaussianNB) Classifier is derived from the Scikit-Learn Library of Python and is generally based on the supervised learning algorithm which implies the probabilistic approach and normal Gaussian distribution of the data. The likelihood of the pixels assigned to each land cover class during image partition is assumed to be Gaussian according to the Equation \ref{eq1}:
+The Gaussian Naive Bayes (GaussianNB) Classifier is \hl{originally incepted in 18th century by Reverend Thomas Bayes and described in the theorem. Now it is widely used in ML and computer science applications} \cite{Chanetal1982}. \hl{In the GRASS GIS, it is }derived from the Scikit-Learn Library of Python\hl{. The GaussianNB algorithm} is generally based on the supervised learning \hl{method} which implies the probabilistic approach and normal Gaussian distribution of the data. \hl{Here }the likelihood of the pixels assigned to each land cover class during image partition is assumed to be Gaussian according to the Equation \ref{eq1}:
 
 \begin{equation}
 P(x_{i} | y)=\frac{1}{\sqrt{2\pi\sigma^2_y}}exp\biggl( -\frac{(x_{i}-\mu_{y})^2}{2\sigma^2_y}\biggr)
