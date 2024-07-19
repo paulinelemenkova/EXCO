@@ -56,6 +56,7 @@
 \usepackage[super]{nth}
 \usepackage{lineno}
 \usepackage{soul}
+\usepackage{verbatim}
 
 %% The lineno packages adds line numbers. Start line numbering with
 %% \begin{linenumbers}, end it with \end{linenumbers}. Or switch it on
@@ -219,7 +220,19 @@ In contrast to the traditional approaches, the principal aspect of the ML consis
 \hl{This research is focused on the environmental mapping of selected region of Egypt using RS data processed by AI and ML methods using GRASS GIS scripts. }The GIS that have included ML modules to select from perform better for image processing compared to simplified programs. Amongst the types of such available tools, Geographic Resources Analysis Support System (GRASS) GIS provides the options of ML for RS data processing that are based on the Python's library Scikit-Learn \cite{scikitlearn}, such as, for instance, Random Forest (RF), Nearest Neighbors algorithms (KNeighborsClassifier), Stochastic Gradient Descent (SGD) learning classifier, linear classifiers that include Support Vector Machine (SVM), logistic regression and GradientBoostingClassifier. These options are not only intended to advance the image processing workflow using powerful tools of Python embedded in GRASS GIS thus ensuring the quality and accuracy of image classification but also use a variety of mathematical approaches that can be finely tuned to diverse purposes of image processing. While GRASS GIS also has a wide variety of traditional modules for processing vector and raster types of geospatial data, such as tools for geomorphological computations, hydrological modelling or analytical data visualisations, these options differ in that they predominantly adjusted to cartographic data using internal modules rather than Python algorithms. 
 
 \subsection{Maximum Likelihood}
-While maximum likelihood (MaxLike) estimation (Figure \ref{fig02}) mostly pursue statistical and evaluation goals, the advent of this method which aims at the estimating the probability distribution in dataset have created opportunities to the pursuit of satellite image processing. Thus, the MaxLike method enables a straightforward approach to partition of pixels into groups using clusters of cells with similar spectral reflectance within the observed dataset. This method is employed in GRASS GIS using 'i.cluster' and 'i.maxlik' modules. 
+While maximum likelihood (MaxLike) estimation (Figure \ref{fig02}) mostly pursue statistical and evaluation goals, the advent of this method which aims at the estimating the probability distribution in dataset have created opportunities to the pursuit of satellite image processing. Thus, the MaxLike method enables a straightforward approach to partition of pixels into groups using clusters of cells with similar spectral reflectance within the observed dataset. \hl{Here, only multispectral bands (Bands 1 to 7) of the Landsat-8 images were selected, without panchromatic (Band 8), Cirrus (Band 9) and Thermal Infrared  (Bands 10 and 11). To this end, the multispectral bands were grouped using commant $subgroup=res\_30m$ that enables to select only the target bands. Then, the number of classes was defined to 10 and the classification was performed using 'i.cluster' and 'i.maxlik' modules of GRASS GIS, as demonstrated in script below: }
+
+\begin{footnotesize}
+\begin{verbatim}
+i.cluster group=L8_2023_Faiyum subgroup=res_30m \
+  signaturefile=cluster_L8_2023_Faiyum \
+  classes=10 reportfile=rep_clust_L8_2023_Faiyum.txt
+ i.maxlik group=L8_2023_Faiyum subgroup=res_30m \
+  signaturefile=cluster_L8_2023_Faiyum \
+  output=L8_2023_cluster_classes \
+  reject=L8_2023_cluster_reject
+\end{verbatim}
+\end{footnotesize}
 
 The numerical results of the classification are stored using 'reportfile' function which contains statistical parameters of cluster classes: class size, separation, percent convergence, number of iterations, means and standard deviations for Landsat bands and class separability matrix. Sample pixel sizes were selected for every images (sample size: 6676 points for year 2013 and 6678 for 2023); the standard and mean deviation of the partition were calculated. Training cluster maps are computer for 10 classes of land cover types over the study area for each scene and used as training data in the machine learning approach. The outcomes are validated with computed reject threshold results using chi square test to determine levels of confidence of correctly classified pixels on raster scenes. The output of the images processed using MaxLike and computed rejection probability classes are shown in Figure \ref{fig02}.
 
@@ -232,9 +245,23 @@ P(x_{i} | y)=\frac{1}{\sqrt{2\pi\sigma^2_y}}exp\biggl( -\frac{(x_{i}-\mu_{y})^2}
 \label{eq1}
 \end{equation}
 
-where the parameters $\sigma_y$ and $\mu_y$  are computed using the approach of maximum likelihood.
+where the parameters $\sigma_y$ and $\mu_y$  are computed using the approach of maximum likelihood. Thus, the algorithm of GaussianNB Classifier computes the likelihood of the features using the Bayes' theorem which assumes the independence between every pair of pixels according to Gaussian distribution and considers the value of cells assigned to each class of the classified satellite image as variables. \hl{In the scripting environment of GRASS GIS, the Gaussian NB Classifier was implemented using the following script: }
 
-Thus, the algorithm of GaussianNB Classifier computes the likelihood of the features using the Bayes' theorem which assumes the independence between every pair of pixels according to Gaussian distribution and considers the value of cells assigned to each class of the classified satellite image as variables. 
+\begin{footnotesize}
+\begin{verbatim}
+r.random input=L8_Faiyum_2013_cluster_classes seed=100 \
+    npoints=1000 raster=training_pixels
+r.learn.train group=L8_2023_Faiyum 
+    training_map=training_pixels \
+    model_name=GaussianNB n_estimators=500 \
+    save_model=GNB_model.gz
+r.learn.predict group=L8_2013_Faiyum \
+    load_model=GNB_model.gz output=GNB_classification
+r.category GNB_classification
+\end{verbatim}
+\end{footnotesize}
+
+\hl{The parameters were selected as follows: number of seed for rand() function is selected as 100 with number of evaluated cells within the raster image is 1000. The selected value is chosen to achieve the better accuracy, since cells in the resulting raster map overlap with those of the input image, which based on the current computational region according to the coordinate extent of the images. The points in the resulting map based on image classification are located in cell centres of these cells, hence the cells are associated with the random point locations in the original Landsat scene. }
 
 \subsection{MLPClassifier}
 
@@ -292,7 +319,26 @@ The application of RF in image processing consists in selecting a random pixel f
 
 \section{Results and discussion}
 
-\hl{The results of the unsupervised automatic classification of the images using clustering and maximal likelihood approaches are presented in Figure} \ref{fig03}. \hl{It also shows the computed rejection probability classes by GRASS GIS visualization of the processed images.}
+\hl{The results of the unsupervised automatic classification of the images using clustering and maximal likelihood approaches are presented in Figure} \ref{fig03}. \hl{It also shows the computed rejection probability classes by GRASS GIS visualization of the processed images.} The computed class separability matrix for 10 classes of land cover types identified on the image on 2013 is given in matrix block below. The results of the MaxLike unsupervised classification were employed as seed training dataset for ML algorithms\hl{. }The classification for 2013 reported 98.26\% points stable in 10 classes; the classification for 2013 reported 98.01\% points stable points stable. 
+
+The cartographic visualization of the images processed with four methods is presented in Figure \ref{fig03}. \hl{An essential point when classifying satellite image consists in the accurate selection of the land cover categories which should be identified, recognised on the images and discriminated on the resulting maps. }
+
+\begin{gather}
+\scriptsize
+\begin{matrix}
+    & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 \\
+1 & 0 &  &  &  &  &  &  &  &  &  \\
+2 & 1.8 & 0 &  &  &  &  &  &  &  &  \\
+3 & 2.6 & 1.7 & 0 &  &  &  &  &  &  &  \\
+4 & 2.4 & 1.0 & 1.0 & 0 &  &  &  &  &  &  \\
+5 & 3.7 & 2.8 & 1.0 & 1.7 & 0 &  &  &  &  &  \\
+6 & 5.0 & 4.3 & 2.2 & 2.9 & 1.2 & 0 &  &  &  &  \\
+7 & 6.9 & 6.3 & 3.6 & 4.4 & 2.5 & 1.3 & 0 &  &  &  \\
+8 & 8.9 & 8.3 & 4.9 & 5.7 & 3.6 & 2.3 & 1.0 & 0 &  &  \\
+9 & 10.0 & 9.4 & 5.6 & 6.4 & 4.4 & 3.0 & 1.8 & 1.0 & 0 &  \\
+10 & 8.6 & 8.1 & 5.4 & 6.0 & 4.4 & 3.3 & 2.4 & 1.9 & 1.2 & 0 \\              
+\end{matrix}
+\end{gather}
 
 \begin{figure}[H]
   \centering
@@ -316,29 +362,12 @@ The application of RF in image processing consists in selecting a random pixel f
   \label{fig02}
 \end{figure}
 
-The computed class separability matrix for 10 classes of land cover types identified on the image on 2013 is given in matrix block below. The results of the MaxLike unsupervised classification were employed as seed training dataset for ML algorithms\hl{. }The classification for 2013 reported 98.26\% points stable in 10 classes; the classification for 2013 reported 98.01\% points stable points stable. 
-
-The cartographic visualization of the images processed with four methods is presented in Figure \ref{fig03}. \hl{An essential point when classifying satellite image consists in the accurate selection of the land cover categories which should be identified, recognised on the images and discriminated on the resulting maps. }The land cover types in the northern Egypt were identified \hl{using reports from previous existing studies and existing data. These were modified and generalised according to the current study area. For this purpose, land cover type were proposed for the study area with ten categories adopted from the existing classification scheme. As a result, }the\hl{ }landscape types around the Nile Delta and Faiyum Oasis \hl{were classified and grouped in these classes}:  1) urban areas, 2) agricultural fields, 3) water areas in the Nile river and Mediterranean Sea, 4) coastal shelf zones, 5) consolidated base lands and soils; 6) sandy areas in the desert; 7) natural vegetation in the non-urban areas; 8) croplands; 9) salt; 10) sabkha. \hl{The identification of these land cover types was then performed automatically using computer vision and ML algorithms embedded in the GRASS GIS.}  
-
-\begin{gather}
-\begin{matrix}
-    & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 \\
-1 & 0 &  &  &  &  &  &  &  &  &  \\
-2 & 1.8 & 0 &  &  &  &  &  &  &  &  \\
-3 & 2.6 & 1.7 & 0 &  &  &  &  &  &  &  \\
-4 & 2.4 & 1.0 & 1.0 & 0 &  &  &  &  &  &  \\
-5 & 3.7 & 2.8 & 1.0 & 1.7 & 0 &  &  &  &  &  \\
-6 & 5.0 & 4.3 & 2.2 & 2.9 & 1.2 & 0 &  &  &  &  \\
-7 & 6.9 & 6.3 & 3.6 & 4.4 & 2.5 & 1.3 & 0 &  &  &  \\
-8 & 8.9 & 8.3 & 4.9 & 5.7 & 3.6 & 2.3 & 1.0 & 0 &  &  \\
-9 & 10.0 & 9.4 & 5.6 & 6.4 & 4.4 & 3.0 & 1.8 & 1.0 & 0 &  \\
-10 & 8.6 & 8.1 & 5.4 & 6.0 & 4.4 & 3.3 & 2.4 & 1.9 & 1.2 & 0 \\              
-\end{matrix}
-\end{gather}
+The land cover types in the northern Egypt were identified \hl{using reports from previous existing studies and existing data. These were modified and generalised according to the current study area. For this purpose, land cover type were proposed for the study area with ten categories adopted from the existing classification scheme. As a result, }the\hl{ }landscape types around the Nile Delta and Faiyum Oasis \hl{were classified and grouped in these classes}:  1) urban areas, 2) agricultural fields, 3) water areas in the Nile river and Mediterranean Sea, 4) coastal shelf zones, 5) consolidated base lands and soils; 6) sandy areas in the desert; 7) natural vegetation in the non-urban areas; 8) croplands; 9) salt; 10) sabkha. \hl{The identification of these land cover types was then performed automatically using computer vision and ML algorithms embedded in the GRASS GIS.}  
 
 Accordingly, the computed class separability matrix for 10 classes of the land cover types recognised in image on 2023 is given in matrix block below:  
 
 \begin{gather}
+\scriptsize
 \begin{matrix}
     & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 \\
 1 & 0 &  &  &  &  &  &  &  &  &  \\
