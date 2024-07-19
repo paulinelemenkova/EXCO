@@ -383,8 +383,9 @@ Accordingly, the computed class separability matrix for 10 classes of the land c
 \end{matrix}
 \end{gather}
 
+\hl{The class separability matrix indicates the values of the class separation for each of the 10 land cover class. Hence, the values means the distance between the individual classes defined automatically during the iteration process. Below this distance, the categories of land cover types are grouped into one class, which is repeated during the next iterations until the results are optimised. Larger values (over 1.5) indicate the specified distance between the land cover classes, while lower values (0.5 to 1.5) are merged  and the process is repeated. Hence, the percentage of accurately classified images with correctly assigned land cover categories is calculated and summarised in the two matrices for each image showing class separability for the years 2013 and 2023.}
+
 Among the compared outputs, the MLP and SVC Classifiers differ from the Random Forest and Naive Bayes approaches, due to the different approaches (ANN and SVM methods). The map generated using Naive Bayes Classified (Figure \ref{fig03}, a) is comparable with the map based on the Random Forest Classifier (Figure \ref{fig03}, d), while MLP Classifier presented a more generalised map (Figure \ref{fig03}, b) using deep learning network approach. 
-Being one of the most efficient inductive learning algorithms of ML in data science, Naive Bayes has advantages in the classification performances among the ML algorithms due to the effects of dependence distribution of nodes within classes and integrated  dependence of all nodes \cite{Zhang2004TheOO}. Hence, the Naive Bayes is optimal if the dependences distribute evenly in classes which is excellently suits to the homogeneous types of landscapes with diversified land cover classes. However, this approach is not optimised for images with high landscape heterogeneity.
 
 \begin{figure}[H]
   \centering
@@ -407,6 +408,8 @@ Being one of the most efficient inductive learning algorithms of ML in data scie
   \caption{Cartographic visualization of the supervised ML-based classification using four different models of GRASS GIS embedded in r.learn.train' module: \textbf{(a)}: GaussianNB Classifier; \textbf{(b)}: MLP Classifier; \textbf{(c)}: SVC Classifier; \textbf{(d)}: Random Forest Classifier.}
   \label{fig03}
 \end{figure}
+
+Being one of the most efficient inductive learning algorithms of ML in data science, Naive Bayes has advantages in the classification performances among the ML algorithms due to the effects of dependence distribution of nodes within classes and integrated  dependence of all nodes \cite{Zhang2004TheOO}. Hence, the Naive Bayes is optimal if the dependences distribute evenly in classes which is excellently suits to the homogeneous types of landscapes with diversified land cover classes. However, this approach is not optimised for images with high landscape heterogeneity.
 
 The advantages of SVM (Figure \ref{fig03}, c) can be explained by its effectivity in high dimensional datasets which is valuable for satellite images that consists thousands of pixels as cells. In our case, 61,405,182 cells were classified automatically for each band of multispectral Landsat 8\hl{ }OLI/TIRS images with 30-m resolution where each raster image contained 7911 rows and 7762 columns of cells. More specifically, the SVM presents high search accuracy compared to other algorithms after a few iterations. Besides, using SVM is supportive for time series analysis where several satellite images are compared since this method is effective when number of dimensions is larger than samples. This is particular valuable for detecting complex land cover patterns in the regions with high heterogeneity of landscapes, such as mixed areas with urban areas and natural spaces. 
 
