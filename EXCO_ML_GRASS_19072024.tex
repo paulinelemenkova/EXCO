@@ -83,11 +83,9 @@
 %% and the form \ead[url] for the home page:
 %% \title{Title\tnoteref{label1}}
 %% \tnotetext[label1]{}
-%% \author{Name\corref{cor1}\fnref{label2}}
-%% \ead{email address}
+%% 
 %% \ead[url]{home page}
-%% \fntext[label2]{}
-%% \cortext[cor1]{}
+
 %% \affiliation{organization={},
 %%             addressline={},
 %%             city={},
@@ -98,7 +96,10 @@
 
 \title{Automation of image processing through ML algorithms of GRASS GIS using embedded Scikit-Learn library of Python}
 
-\author{Polina Lemenkova}
+\author{Polina Lemenkova\corref{cor1}}
+\ead{polina.lemenkova2@unibo.it; polina.lemenkova@plus.ac.at}
+%\fntext[label2]{Label2}
+%\cortext[cor1]{Correspondence: polina.lemenkova2@unibo.it; polina.lemenkova@plus.ac.at}
 
 \affiliation{organization={Department of Geoinformatics, Faculty of Digital and Analytical Sciences, Universität Salzburg},
             addressline={Schillerstraße 30}, 
@@ -383,10 +384,6 @@ Accordingly, the computed class separability matrix for 10 classes of the land c
 \end{matrix}
 \end{gather}
 
-\hl{The class separability matrix indicates the values of the class separation for each of the 10 land cover class. Hence, the values means the distance between the individual classes defined automatically during the iteration process. Below this distance, the categories of land cover types are grouped into one class, which is repeated during the next iterations until the results are optimised. Larger values (over 1.5) indicate the specified distance between the land cover classes, while lower values (0.5 to 1.5) are merged  and the process is repeated. Hence, the percentage of accurately classified images with correctly assigned land cover categories is calculated and summarised in the two matrices for each image showing class separability for the years 2013 and 2023.}
-
-Among the compared outputs, the MLP and SVC Classifiers differ from the Random Forest and Naive Bayes approaches, due to the different approaches (ANN and SVM methods). The map generated using Naive Bayes Classified (Figure \ref{fig03}, a) is comparable with the map based on the Random Forest Classifier (Figure \ref{fig03}, d), while MLP Classifier presented a more generalised map (Figure \ref{fig03}, b) using deep learning network approach. 
-
 \begin{figure}[H]
   \centering
   \begin{tabular}[b]{c}
@@ -409,11 +406,17 @@ Among the compared outputs, the MLP and SVC Classifiers differ from the Random F
   \label{fig03}
 \end{figure}
 
+\hl{The class separability matrix indicates the values of the class separation for each of the 10 land cover class. Hence, the values means the distance between the individual classes defined automatically during the iteration process. Below this distance, the categories of land cover types are grouped into one class, which is repeated during the next iterations until the results are optimised. Larger values (over 1.5) indicate the specified distance between the land cover classes, while lower values (0.5 to 1.5) are merged  and the process is repeated. Hence, the percentage of accurately classified images with correctly assigned land cover categories is calculated and summarised in the two matrices for each image showing class separability for the years 2013 and 2023.}
+
+Among the compared outputs, the MLP and SVC Classifiers differ from the Random Forest and Naive Bayes approaches, due to the different approaches (ANN and SVM methods). The map generated using Naive Bayes Classified (Figure \ref{fig03}, a) is comparable with the map based on the Random Forest Classifier (Figure \ref{fig03}, d), while MLP Classifier presented a more generalised map (Figure \ref{fig03}, b) using deep learning network approach. 
+
 Being one of the most efficient inductive learning algorithms of ML in data science, Naive Bayes has advantages in the classification performances among the ML algorithms due to the effects of dependence distribution of nodes within classes and integrated  dependence of all nodes \cite{Zhang2004TheOO}. Hence, the Naive Bayes is optimal if the dependences distribute evenly in classes which is excellently suits to the homogeneous types of landscapes with diversified land cover classes. However, this approach is not optimised for images with high landscape heterogeneity.
 
 The advantages of SVM (Figure \ref{fig03}, c) can be explained by its effectivity in high dimensional datasets which is valuable for satellite images that consists thousands of pixels as cells. In our case, 61,405,182 cells were classified automatically for each band of multispectral Landsat 8\hl{ }OLI/TIRS images with 30-m resolution where each raster image contained 7911 rows and 7762 columns of cells. More specifically, the SVM presents high search accuracy compared to other algorithms after a few iterations. Besides, using SVM is supportive for time series analysis where several satellite images are compared since this method is effective when number of dimensions is larger than samples. This is particular valuable for detecting complex land cover patterns in the regions with high heterogeneity of landscapes, such as mixed areas with urban areas and natural spaces. 
 
 The RF classifier presented the best results compared to the other approaches in the presented maps (Figure \ref{fig03} d). Its superiority is explained by the tuned optimization of the image classification. Using the parameter tuning in GRASS GIS, each node is being split during the construction of a tree with the best split found either from all input pixels of the image or a randomised subset depending on the resolution and extent of the training dataset of the image which depends on the study area and heterogeneity of the visualised landscapes. This randomness aims at decreasing the variance of the RF estimator which allows to overcome overfitting of the individual decision trees with high variance in case of heterogeneous landscapes. The artificially increased randomness of the RF algorithm enables either to decrease the prediction errors of the decision trees or cancel them out, thus making image classification more accurate.
+
+\hl{The validation is based on the statistical analysis performed in GRASS GIS. Thus, for the year of 2013, the final results report convergence=98.3\% and 98.26\% points stable. For the year 2023, the classification results report 98.01\% points stable and convergence=98.0\%. Since the computed accuracy is higher than 80\%, the classification of the multispectral image is performed robustly. Therefore, the application of the ML, as demonstrated in this study, can be advised for similar future studies where image processing is applied for environmental monitoring and mapping.}
 
 \section{Conclusion}
 
