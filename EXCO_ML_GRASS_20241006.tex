@@ -1,0 +1,449 @@
+%% 
+%% Copyright 2007-2020 Elsevier Ltd
+%% 
+%% This file is part of the 'Elsarticle Bundle'.
+%% ---------------------------------------------
+%% 
+%% It may be distributed under the conditions of the LaTeX Project Public
+%% License, either version 1.2 of this license or (at your option) any
+%% later version.  The latest version of this license is in
+%%    http://www.latex-project.org/lppl.txt
+%% and version 1.2 or later is part of all distributions of LaTeX
+%% version 1999/12/01 or later.
+%% 
+%% The list of all files belonging to the 'Elsarticle Bundle' is
+%% given in the file `manifest.txt'.
+%% 
+
+%% Template article for Elsevier's document class `elsarticle'
+%% with numbered style bibliographic references
+%% SP 2008/03/01
+%%
+%% 
+%%
+%% $Id: elsarticle-template-num.tex 190 2020-11-23 11:12:32Z rishi $
+%%
+%%
+%\documentclass[preprint,12pt]{elsarticle}
+
+%% Use the option review to obtain double line spacing
+%% \documentclass[authoryear,preprint,review,12pt]{elsarticle}
+
+%% Use the options 1p,twocolumn; 3p; 3p,twocolumn; 5p; or 5p,twocolumn
+%% for a journal layout:
+%% \documentclass[final,1p,times]{elsarticle}
+%% \documentclass[final,1p,times,twocolumn]{elsarticle}
+%% \documentclass[final,3p,times]{elsarticle}
+%% \documentclass[final,3p,times,twocolumn]{elsarticle}
+%% \documentclass[final,5p,times]{elsarticle}
+\documentclass[final,5p,times,twocolumn]{elsarticle}
+%\documentclass[3p,times]{elsarticle}
+%% For including figures, graphicx.sty has been loaded in
+%% elsarticle.cls. If you prefer to use the old commands
+%% please give \usepackage{epsfig}
+
+%% The amssymb package provides various useful mathematical symbols
+\usepackage{amsmath,mathtools,amsthm}
+	\setcounter{MaxMatrixCols}{15}
+\usepackage{array}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\graphicspath{{figures/}} % path to folder with figures
+\usepackage{float}
+\usepackage{xcolor}
+\usepackage{chngcntr}
+\counterwithin*{equation}{section}
+\usepackage[super]{nth}
+\usepackage{lineno}
+\usepackage{soul}
+\usepackage{verbatim}
+
+%% The lineno packages adds line numbers. Start line numbering with
+%% \begin{linenumbers}, end it with \end{linenumbers}. Or switch it on
+%% for the whole article with \linenumbers.
+\usepackage{lineno}
+
+\journal{Examples and Counterexamples}
+
+\begin{document}
+\linenumbers
+\setcounter{equation}{0}
+
+\begin{frontmatter}
+
+%% Title, authors and addresses
+
+%% use the tnoteref command within \title for footnotes;
+%% use the tnotetext command for theassociated footnote;
+%% use the fnref command within \author or \address for footnotes;
+%% use the fntext command for theassociated footnote;
+%% use the corref command within \author for corresponding author footnotes;
+%% use the cortext command for theassociated footnote;
+%% use the ead command for the email address,
+%% and the form \ead[url] for the home page:
+%% \title{Title\tnoteref{label1}}
+%% \tnotetext[label1]{}
+%% 
+%% \ead[url]{home page}
+
+%% \affiliation{organization={},
+%%             addressline={},
+%%             city={},
+%%             postcode={},
+%%             state={},
+%%             country={}}
+%% \fntext[label3]{}
+
+\title{Automation of image processing through ML algorithms of GRASS GIS using embedded Scikit-Learn library of Python}
+
+\author{Polina Lemenkova\corref{cor1}}
+\ead{polina.lemenkova2@unibo.it; polina.lemenkova@plus.ac.at}
+%\fntext[label2]{Label2}
+%\cortext[cor1]{Correspondence: polina.lemenkova2@unibo.it; polina.lemenkova@plus.ac.at}
+
+\affiliation{organization={Department of Geoinformatics, Faculty of Digital and Analytical Sciences, Universität Salzburg},
+            addressline={Schillerstraße 30}, 
+            city={Salzburg},
+            postcode={A-5020}, 
+            country={Austria}
+          }
+\affiliation{organization={Department of Biological, Geological and Environmental Sciences, Alma Mater Studiorum -- Università di Bologna},
+            addressline={Via Irnerio 42}, 
+            city={Bologna},
+            postcode={IT-40126, Emilia-Romagna}, 
+            country={Italy}
+          }
+
+\begin{abstract}
+Image processing using Machine Learning (ML) and Artificial Neural Network (ANN) methods was investigated by employing the algorithms of \hl{Geographic Resources Analysis Support System} (GRASS) \hl{Geographic Information System} GIS with embedded Scikit-Learn library of Python \hl{language}. The data are obtained from the \hl{United States Geological Survey} (USGS) and include the Landsat 8 \hl{Operational Land Imager / Thermal Infrared Sensor} (OLI/TIRS) \hl{multispectral }satellite images on 2013 and 2023\hl{. The study area covers the region of }Nile Delta and the Faiyum Oasis, Egypt. \hl{A series} of modules \hl{for raster image processing was applied using }scripting language of GRASS GIS to process the \hl{remote sensing data. The }satellite images \hl{were classified }into raster maps presenting the land cover types\hl{. }These include 'i.cluster' and 'i.maxlik' for non-supervised classification used as training dataset of random pixel seeds, 'r.random', 'r.learn.train', 'r.learn.predict' and 'r.category' for ML part of image processing. The consequences of various ML parameters on the cartographic outputs are analysed, such as speed and accuracy, randomness of nodes, analytical determination of the output weights, and dependence distribution of pixels for each algorithm. Supervised learning models of GRASS GIS were tested and compared including the Gaussian Naive Bayes (GaussianNB), Multi-layer Perceptron classifier (MLPClassifier), Support Vector Machines (SVM) Classifier, and Random\hl{ }Forest\hl{ }Classifier (RF). Though each algorithms was developed to serve different objectives of ML applications in RS data processing, their technical implementation and practical purposes present valuable approaches to cartographic data processing and image analysis. The results shown that the most time-consuming algorithms was noted as \hl{SVM} classification, while the fastest results were achieved by the GaussianNB approach to image processing and the best results are achieved by RF Classifier.
+
+\end{abstract}
+
+\begin{keyword}
+
+geoinformation \sep machine learning \sep cartography \sep informatics \sep remote sensing \sep satellite image \sep geospatial analysis
+
+\PACS 91.10.Da \sep 91.10.Jf \sep 91.10.Sp \sep 91.10.Xa \sep 96.25.Vt \sep 91.10.Fc \sep 95.40.+s \sep 95.75.Qr \sep 95.75.Rs \sep 42.68.Wt
+
+\MSC 86A30 \sep 86-08 \sep 86A99 \sep 86A04
+
+\end{keyword}
+
+\end{frontmatter}
+
+\section{Introduction}
+
+\hl{Remote Sensing (RS) data are the key source of spatial information that enable to monitor the physical characteristics of the Earth. Satellite images provide information on the variety and dynamics of landscapes visible from space. Comparison of images as time series enables to recognise land cover types and detect changes remotely, which presents a cost-effective approach to environmental mapping. Numerous existing RS-based environmental analysis presented numerous case studies that aimed at revealing changes in land cover types} \cite{geosciences12100357,976724,Lemenkova202211,6723424}. \hl{Such and similar works reported the use of Geographic Information System (GIS) as a tool for RS-based mapping. }
+
+\hl{The question now arises regarding how to process RS data effectively and accurately. Image processing and classification are considered one of the most significant issues in Remote Sensing (RS). Accuracy and speed of image processing strongly depend on selection of methods and approaches which requires advanced tools and algorithms. The advanced methods of RS data handling enable to retrieve the multi-facetted information which highlights diverse aspects of the Earth's landscapes. It can be further utilised for diverse subjects, including geological mapping, climate change, environmental monitoring and hazard risk assessment in the coastal areas. The geoinformation obtained from the satellite images contributes to deepening our knowledge in Earth sciences and thus increase our understanding of the complex processes interrelated between the environmental processes reflected in ecosystems, climate change and anthropogenic activities and their responses by the natural landscapes. The multidisciplinary of the RS data and geoinformation on the one hand and the applicability of the advanced technical methods (programming, AI and ML) on the other hand, provide effective tools for environmental analysis.} 
+
+Machine learning (ML)\hl{ presents a powerful and robust method for RS data processing}. \hl{The }Earth observation data are provided in large quantities\hl{ which requires advanced methods of their rapid and accurate processing}\cite{LI2023103345,YIN2021102514,HUANG20181915}\hl{. Diverse approaches }provide \hl{different technical solutions } to process satellite images\hl{ effectively. These include} either programming libraries \cite{9884758,Lemenkova202306,9297369,9553880}, or embedded plugins and modules in the existing GIS software \cite{Lemenkova202307,rs15041148}. However, \hl{technical parameters of} images \hl{and} approaches of algorithms vary\hl{ }between programs, \hl{which results in the problem of} selecting optimal methods \hl{of image processing}. Though not all Geographic Information System (GIS) software include the \hl{ML} options in their toolsets for \hl{diverse} reasons (e.g., lack of fixed tools, awareness of options), the choice methods for processing RS data \hl{depends} on the \hl{availability of} algorithms\hl{. To meet }the needs of image processing, \hl{these may} vary\hl{ }from either scripting libraries or combining GIS with programming in a\hl{ }diversified workflow \citep{5070195,Lemenkova202227,4736879,6049966,Lemenkova202301,6910592}.
+
+\hl{In the early 1970s, when the GIS science has started its development, the cartographic possibilities were limited to the existing restricted functionality of GIS, while modern framework uses programming libraries to enhance technical capabilities of GIS through the AI and ML}. \hl{To} achieve the \hl{main }objective of RS \hl{data processing}, that is\hl{, }to \hl{accurately and rapidly }extract information from satellite images, these data should be processed using advanced computer-based techniques. In this case, the algorithms of RS data processing leverage diverse classification methods\hl{ }\cite{su151813786,Lemenkova202229}. \hl{These} approaches\hl{ }are implemented by many algorithms, including supervised and non-supervised classification, clustering, segmentation, semantic identification, partition, and object based image analysis (OBIA). However, ML algorithms of image analysis are not accessible to all GIS due to development constraints and their complexity. Based on this, the choice of the ML methods is a practice that is not always available to the cartographers and that is \hl{mainly }utilised \hl{in computer science}.
+
+Considering the diversity of the ML approaches and their existent nuances that result in quality of image processing, the algorithms\hl{ }should be tested and compared \hl{to evaluate their performance}. Rather, the choice of methods of RS data processing enables options that allow for algorithms to be used at either background tools or tuning steps for better image analysis and interpretation \cite{rs16010184,Lemenkova202310,rs16010127}. The expanded opportunity to exercise choice in ML methods of RS data processing is argued to promote advancements in satellite image analysis by not only expanding the choices of methods\hl{ }but also stimulating higher quality of mapping and cartographic output \cite{TSELKA2023131,Lemenkova202021,10292983}. Hence,\hl{ }ML\hl{ facilitates} mapping workflow through moving the priorities from technical issues of image processing to \hl{a} deeper analysis. Such benefits are meant to operate through the selection of optimal ML methods creating opportunities and choice amongst the available tools of RS data processing \cite{WU2023110723}.
+
+In contrast to the traditional approaches, the principal aspect of the ML consists in the application of the Artificial Intelligence (AI) paradigm. This novel method is based \hl{on using the} data-driven mathematical and statistical models which enable\hl{ }to automatically learn from the input dataset\hl{. The generated }output based on this learning\hl{ }is performed in a real time regime, during\hl{ }image processing\hl{ }\cite{DOSSANTOS2022106753,ROCHA2022107415}. \hl{Such} approach specifically uses input information as a seed to learn complex patterns and relationships within the dataset. \hl{The} use of ML choice has been\hl{ }flexibly adjusted to diverse applications to find patterns and links in datasets. For instance,\hl{ }ML \hl{can be applied} for precise forecasting \cite{LATIF202316}, predictive analysis in hazard risk assessment \cite{XIONG2021145256,WU2024103612}, geological mapping \cite{HAN202387}, hydrological modelling \cite{RAFIK2023101569,AOURAGH2023100939}, environmental assessment \cite{AMANI2023108324}, marine research \cite{ERDEM2021964} and evaluation of urban sprawl \cite{LI2023104653}. \hl{In this work, we use the techniques of Geographic Resources Analysis Support System (GRASS) GIS scripting software for processing RS data using AI and ML methods.}
+
+\hl{The technical tools applied in this study supported the advanced visualisation of the RS data for geospatial modelling and mapping of the coasts of northern Egypt. Unlike the traditional methods of mapping that are usually applied in RS data processing, the integrated approach which combines programming for satellite image processing and cartographic methods for visualization paves the way to the more advanced ways of handling Earth observation data. Specifically, it combines programming and GIS which is useful for mapping highly heterogeneous landscapes in the arid regions where the mosaic vegetation pattern contrasts from the desert areas, hinterland with agriculture and Faiyum Oasis, Upper Egypt. }
+
+\hl{The objective of this study is to investigate the performance of ML and ANN methods for image processing by employing the algorithms of GRASS GIS with embedded Scikit-Learn library of Python. This investigation implies the comparison of methods and models' performance for each case: Gaussian Naive Bayes (GaussianNB), Multi-layer Perceptron classifier (MLPClassifier), Support Vector Machines (SVM), and Random Forest (RF). The comparison aims to determine which algorithm provides the best performance for RS data processing with an example of Landsat 8 OLI/TIRS satellite images.}
+
+\section{Image processing}
+
+\subsection{Data}
+\hl{The data are }presented by the Landsat 8 OLI-TIRS satellite images covering western segment of the Nile Delta and the Faiyum Oasis, upper Egypt in 2013 and 2023, Figure \ref{fig01}. \hl{The} images were selected based on their quality, coverage and suitability, and downloaded from the\hl{ } EarthExplorer website. 
+
+\begin{figure}[H]
+  \centering
+  \begin{tabular}[b]{c}
+    \includegraphics[width=3.9cm]{Fig_01a.jpg} \\
+    \small (a)
+  \end{tabular}
+  \begin{tabular}[b]{c}
+    \includegraphics[width=3.9cm]{Fig_01b.jpg} \\
+    \small (b)
+  \end{tabular}
+  \caption{Data sources: Landsat 8 OLI/TIRS images on western Nile Delta and the Faiyum Oasis, Egypt: \textbf{(a)}: July 2013; \textbf{(b)}: July 2023.}
+  \label{fig01}
+\end{figure}
+
+\begin{table*}[t]
+    \centering
+    \small{
+     \begin{tabular}{|l|l|l|}
+    \hline
+        	\textbf{Data Set Attribute} & \textbf{Attribute Value} & \textbf{Attribute Value} \\ \hline
+        Landsat Product Identifier L2 & LC08\_L2SP\_177039\_20230721\_20230803\_02\_T1 & LC08\_L2SP\_177039\_20130725\_20200912\_02\_T1 \\ \hline
+        Landsat Product Identifier L1 & LC08\_L1TP\_177039\_20230721\_20230803\_02\_T1 & LC08\_L1TP\_177039\_20130725\_20200912\_02\_T1 \\ \hline
+        Landsat Scene Identifier & LC81770392023202LGN00 & LC81770392013206LGN01 \\ \hline
+        Date Acquired & 2023/07/21 & 2013/07/25 \\ \hline
+        Roll Angle & -0.001 & 0.000 \\ \hline
+        Date Product Generated L2 & 2023/08/03 & 2020/09/12 \\ \hline
+        Date Product Generated L1 & 2023/08/03 & 2020/09/12 \\ \hline
+        Start Time & 2023-07-21 08:29:28 & 2013-07-25 08:31:45.103183 \\ \hline
+        Stop Time & 2023-07-21 08:30:00 & 2013-07-25 08:32:16.873179 \\ \hline
+        Land Cloud Cover & 0.00 & 0.00 \\ \hline
+        Scene Cloud Cover L1 & 0.00 & 0.00 \\ \hline
+        Ground Control Points Model & 662 & 821 \\ \hline
+        Geometric RMSE Model & 7.456 & 6.176 \\ \hline
+        Geometric RMSE Model X & 4.877 & 3.954 \\ \hline
+        Geometric RMSE Model Y & 5.640 & 4.744 \\ \hline
+        Processing Software Version & LPGS\_16.3.0 & LPGS\_15.3.1c \\ \hline
+        Sun Elevation L0RA & 66.45746837 & 66.44030819 \\ \hline
+        Sun Azimuth L0RA & 109.05483881 & 111.66370294 \\ \hline
+        TIRS SSM Model & FINAL & ACTUAL \\ \hline
+        Data Type L2 & OLI\_TIRS\_L2SP & OLI\_TIRS\_L2SP \\ \hline
+        Scene Center Latitude & 30.30634 & 30.30620 \\ \hline
+        Scene Center Longitude & 30.40632 & 30.40229 \\ \hline
+        Corner Upper Left Latitude & 31.34283 & 31.34003 \\ \hline
+        Corner Upper Left Longitude & 29.15158 & 29.14854 \\ \hline
+        Corner Upper Right Latitude & 31.39299 & 31.39022 \\ \hline
+        Corner Upper Right Longitude & 31.60323 & 31.59696 \\ \hline
+        Corner Lower Left Latitude & 29.20342 & 29.20333 \\ \hline
+        Corner Lower Left Longitude & 29.23428 & 29.23120 \\ \hline
+        Corner Lower Right Latitude & 29.24948 & 29.24941 \\ \hline
+        Corner Lower Right Longitude & 31.63332 & 31.62715 \\ \hline
+    \end{tabular}
+    \caption{\hl{Technical parameters of the Landsat-8 OLI/TIRS images used as dataset. Source: EarthExplorer by the United States Geological Survey (USGS).}}
+    }
+    \label{tab01}
+\end{table*}
+
+\hl{The individual technical characteristics of the two images are summarised in Table} \ref{tab01}. The data are provided by the USGS as open source repository from the Collection Number 2, \hl{Category T1}. The row/path of the Landsat swath is 39/177 for both the scenes, collected in dat time in nadir. \hl{Both} images were projected in the \hl{Universal Transverse Mercator} (UTM) Zone 36 for Egypt in WGS84 \hl{Datum and }Ellipsoid\hl{, Station Identifier -- LGN; the Ground Control Points Version used for data correction is 5. The images on 2013 and 2023 were selected to evaluate the decade dynamics of the landscapes around the Faiyum Oasis, Upper Egypt within the 10-year time span}. 
+
+\subsection{Workflow}
+
+\hl{The workflow of GRASS GIS tested on the RS data include image preprocessing, classification, machine learning algorithms and accuracy analysis. The images were imported into GRASS GIS using module 'r.import'. The preprocessing and atmospheric corrections were applied to normalise the moderate-resolution images and eliminate the effects of the atmosphere using "i.landsat.toar:" module. The atmospheric correction of the images was carried out in GRASS GIS using 'i.landsat.toar' which computed the top-of-atmosphere reflectance and temperature for Landsat images. This adjustment transforms the calibrated Digital Number (DN) of the Landsat scenes to top-of-atmosphere reflectance thus improving the quality of the image. Here the atmospheric correction model was applied based on the dark object subtraction (DOS) correction approach.}
+
+\hl{At the next step, 10 groups of land cover categories were defined using information received on previous step in order to recognise these classes on actual study area. Following that, the images were processed using four different ML algorithms of GRASS GIS by the combination of modules "r.random" (which generates training pixels from the land cover classification), "r.learn.train" (which trains models using various ML algorithms) and "r.learn.predict", which performs prediction of the pixels' assignment into target categories based on their spectral signatures.}
+
+\hl{This research is focused on the environmental mapping of selected region of Egypt using RS data processed by AI and ML methods using GRASS GIS scripts. }The GIS that have included ML modules to select from perform better for image processing compared to simplified programs. Amongst the types of such available tools, Geographic Resources Analysis Support System (GRASS) GIS provides the options of ML for RS data processing that are based on the Python's library Scikit-Learn \cite{scikitlearn}, such as, for instance, Random Forest (RF), Nearest Neighbors algorithms (KNeighborsClassifier), Stochastic Gradient Descent (SGD) learning classifier, linear classifiers that include Support Vector Machine (SVM), logistic regression and GradientBoostingClassifier. These options are not only intended to advance the image processing workflow using powerful tools of Python embedded in GRASS GIS thus ensuring the quality and accuracy of image classification but also use a variety of mathematical approaches that can be finely tuned to diverse purposes of image processing. While GRASS GIS also has a wide variety of traditional modules for processing vector and raster types of geospatial data, such as tools for geomorphological computations, hydrological modelling or analytical data visualisations, these options differ in that they predominantly adjusted to cartographic data using internal modules rather than Python algorithms. 
+
+\subsection{Maximum Likelihood}
+While maximum likelihood (MaxLike) estimation (Figure \ref{fig02}) mostly pursue statistical and evaluation goals, the advent of this method which aims at the estimating the probability distribution in dataset have created opportunities to the pursuit of satellite image processing. Thus, the MaxLike method enables a straightforward approach to partition of pixels into groups using clusters of cells with similar spectral reflectance within the observed dataset. \hl{Here, only multispectral bands (Bands 1 to 7) of the Landsat-8 images were selected, without panchromatic (Band 8), Cirrus (Band 9) and Thermal Infrared  (Bands 10 and 11). To this end, the multispectral bands were grouped using commant $subgroup=res\_30m$ that enables to select only the target bands. Then, the number of classes was defined to 10 and the classification was performed using 'i.cluster' and 'i.maxlik' modules of GRASS GIS, as demonstrated in script below: }
+
+\begin{footnotesize}
+\begin{verbatim}
+i.cluster group=L8_2023_Faiyum subgroup=res_30m \
+  signaturefile=cluster_L8_2023_Faiyum \
+  classes=10 reportfile=rep_clust_L8_2023_Faiyum.txt
+ i.maxlik group=L8_2023_Faiyum subgroup=res_30m \
+  signaturefile=cluster_L8_2023_Faiyum \
+  output=L8_2023_cluster_classes \
+  reject=L8_2023_cluster_reject
+\end{verbatim}
+\end{footnotesize}
+
+The numerical results of the classification are stored using 'reportfile' function which contains statistical parameters of cluster classes: class size, separation, percent convergence, number of iterations, means and standard deviations for Landsat bands and class separability matrix. Sample pixel sizes were selected for every images (sample size: 6676 points for year 2013 and 6678 for 2023); the standard and mean deviation of the partition were calculated. Training cluster maps are computer for 10 classes of land cover types over the study area for each scene and used as training data in the machine learning approach. The outcomes are validated with computed reject threshold results using chi square test to determine levels of confidence of correctly classified pixels on raster scenes. The output of the images processed using MaxLike and computed rejection probability classes are shown in Figure \ref{fig02}.
+
+\subsection{GaussianNB Classifier}
+
+The Gaussian Naive Bayes (GaussianNB) Classifier is \hl{originally incepted in 18th century by Reverend Thomas Bayes and described in the theorem. Now it is widely used in ML and computer science applications} \cite{Chanetal1982}. \hl{In the GRASS GIS, it is }derived from the Scikit-Learn Library of Python\hl{. The GaussianNB algorithm} is generally based on the supervised learning \hl{method} which implies the probabilistic approach and normal Gaussian distribution of the data. \hl{Here }the likelihood of the pixels assigned to each land cover class during image partition is assumed to be Gaussian according to the Equation \ref{eq1}:
+
+\begin{equation}
+P(x_{i} | y)=\frac{1}{\sqrt{2\pi\sigma^2_y}}exp\biggl( -\frac{(x_{i}-\mu_{y})^2}{2\sigma^2_y}\biggr)
+\label{eq1}
+\end{equation}
+
+where the parameters $\sigma_y$ and $\mu_y$  are computed using the approach of maximum likelihood. Thus, the algorithm of GaussianNB Classifier computes the likelihood of the features using the Bayes' theorem which assumes the independence between every pair of pixels according to Gaussian distribution and considers the value of cells assigned to each class of the classified satellite image as variables. \hl{In the scripting environment of GRASS GIS, the Gaussian NB Classifier was implemented using the following script: }
+
+\begin{footnotesize}
+\begin{verbatim}
+r.random input=L8_Faiyum_2013_cluster_classes seed=100 \
+    npoints=1000 raster=training_pixels
+r.learn.train group=L8_2023_Faiyum 
+    training_map=training_pixels \
+    model_name=GaussianNB n_estimators=500 \
+    save_model=GNB_model.gz
+r.learn.predict group=L8_2013_Faiyum \
+    load_model=GNB_model.gz output=GNB_classification
+r.category GNB_classification
+\end{verbatim}
+\end{footnotesize}
+
+\hl{The parameters were selected as follows: number of seed for rand() function is selected as 100 with number of evaluated cells within the raster image is 1000. The selected value is chosen to achieve the better accuracy, since cells in the resulting raster map overlap with those of the input image, which based on the current computational region according to the coordinate extent of the images. The points in the resulting map based on image classification are located in cell centres of these cells, hence the cells are associated with the random point locations in the original Landsat scene. }
+
+\subsection{MLPClassifier}
+
+MLPClassifier is a Multi-layer Perceptron classifier derived from the Scikit-Learn Library of Python and is based on fundamentals of predictive learning \cite{Rosenblatt}. The performance of the MLPC differs from the GaussianNB approach since it uses the principle of feedforward Artificial Neural Network (ANN). For data analysis, ANN uses three layers that are used as structures of network topology in a flow of information for data partition. The input, hidden and output layer consist of nodes (i.e., pixels of raster layer) which train the model using supervised learning. 
+
+The principal approach of this process consists in the connection between each node in one layer to those in the following layer through a certain weight ($w_{ij}$). MLPClassifier iteratively evaluates the training data using these connections in weights of the evaluated pixels. The algorithm changes weights repetitively using estimated error until the output image is approached to the expected result and the error is minimised. This sequential operation is formulated in Equation \ref{eq2}: 
+
+\begin{equation}
+\varepsilon(n)=\frac{1}{2} \sum_{output node j}{e_{j}^2(n)}
+\label{eq2}
+\end{equation}
+
+where $e_j(n)$ is the degree of error in an output node $j$ in the n$^{th}$  pixel of the raster dataset and $\varepsilon(n)$ is the node weights which are iteratively adjusted using the minimisation of the errors in the classified raster image for the n$^{th}$ pixel of the raster matrix. Using optimization, each weight $w_{ij}$ is estimated iteratively and changed accordingly using Equation \ref{eq3}: 
+
+\begin{equation}
+\Delta w_{ji}(n)=-\eta\frac{\vartheta\epsilon(n)}{\vartheta\upsilon_{j}(n)}y_{i}(n)
+\label{eq3}
+\end{equation}
+
+where $y_{i}(n)$ is the result of the previous step of classification, and $\eta$ is the tuning parameter of optimization, which aims at quick convergence of the weights of pixels during the iterative process of image classification.
+
+Hence, the MLPC algorithm is sensitive to feature scaling which is related to the resolution of the original raster image. The essential approach of this algorithms consists in random selection of the hidden nodes and analytical determination of the output weights of neural networks \cite{HUANG2006489}. As a result, the MLPClassifier algorithm ensures higher generalisation output at a faster learning speed. 
+
+\subsection{SVC Classifier}
+
+The Support Vector Classification (SVC Classifier) is a branch of the Support vector machines (SVM) which are a set of supervised learning methods \cite{Cortes}. The main approach of the SVM is classifying the new data into one or two given classes using the decision process which tracks the largest separation, i.e., margin, between the given classes. Hence, the a best separation is obtain using the discrimination of the location of the samples within the finite-dimensional space of dataset, and detected largest distance to the nearest training sample of one of these classes. 
+
+\hl{The mathematical foundation of the Support Vector Machine algorithm consists in the following. }When SVC uses training vectors, that is, the sample pixels that are located within the margin of classes,
+$x_{i} \in R^p$ where $ i=1 \dots n$ as two classes and a vector $y \in \{1, - 1\}^n$, it aims to find the $w \in R^p$ and $b \in R$ so that the assignment of pixels to correct land cover class is true for most samples. The formulated problem is expressed in Equation \ref{eq4}:
+
+\begin{equation}
+\min_{\omega,b,\zeta}\frac{1}{2}\omega^T\omega+C\sum_{i=n}^{n}\zeta_{i}
+\label{eq4}
+\end{equation}
+
+which depends on the conditions in the definitions of $y_{i}(\omega^{T}\varphi (x_i) + b)\geq 1-\zeta_{i}$ which should ideally be greater than one for the optimal prediction of the correctly classified pixels on a raster scene, and $\zeta_{i}\geq 0, i = 1,\dots,n$. The SVC solves this problem through the maximisation of margins of the sample classes by analysing the Digital Numbers (DN) of pixels on the raster image and inverse regularisation parameter. After the optimisation of the raster dataset using iterative analysis, the estimated decision function in a classified matrix consisting of cells for a sample of $x$ pixels corresponds to the Equation \ref{eq5}:
+
+\begin{equation}
+\sum_{i\in SV}y_{i}\alpha_{i}K(x_{i},x) + b
+\label{eq5}
+\end{equation}
+
+The resulting output of the classification assigns the predicted class to its sign and the support vectors are summarised using attributes of the classification. Such effective approach has a memory-efficient performance since it utilises a set of training points as decision function, i.e., support vectors which optimises the use of computational facilities of the machine. Moreover, the flexibility of this algorithms is caused by the possibility to adjust the model using different Kernel functions defined which includes both common and custom kernels. 
+ 
+\subsection{RandomForestClassifier}
+
+The RandomForestClassifier (RF Classifier) initially developed by Tin Kam Ho in 1995 \cite{598994} became a well established method of data complexity analysis among ML algorithms \cite{990132}. The essential of the RandomForestClassifier ML ensemble learning approach of image classification is that it generates a randomised multitude of decision trees during the process of training. It uses the training set of classified pixels and builds each tree in the ensemble from this sample with a replacement by introducing randomness in the classification workflow. In image processing, the training algorithm of RF uses the approach of bootstrap aggregating to analyses of pixels. 
+
+The application of RF in image processing consists in selecting a random pixel from the raster matrix, replacing it in the training set and fitting the trees to the samples. This is done through the training set of pixels on the raster image $X = x_{1},\dots, x_{n}$ with responses $Y = y_{1}, \dots, y_{n}$. Hence, for $b = 1, \dots, B$, the algorithm uses $n$ training sample pixels and replaces them using data from training map. Afterwards, the classification tree $f_b$ is being trained using sample training of pixels. Finally, the predictions for new sample pixels $x'$ are made using average predictions from all the decision trees using the rule formulated in Equation \ref{eq6}: 
+
+\begin{equation}
+\hat f=\frac{1}{B}\sum_{b=1}^{B}f_{b}(x')
+\label{eq6}
+\end{equation}
+
+\section{Results and discussion}
+
+\hl{The results of the unsupervised automatic classification of the images using clustering and maximal likelihood approaches are presented in Figure} \ref{fig03}. \hl{It also shows the computed rejection probability classes by GRASS GIS visualization of the processed images.} The computed class separability matrix for 10 classes of land cover types identified on the image on 2013 is given in matrix block below. The results of the MaxLike unsupervised classification were employed as seed training dataset for ML algorithms\hl{. }The classification for 2013 reported 98.26\% points stable in 10 classes; the classification for 2013 reported 98.01\% points stable points stable. 
+
+The cartographic visualization of the images processed with four methods is presented in Figure \ref{fig03}. \hl{An essential point when classifying satellite image consists in the accurate selection of the land cover categories which should be identified, recognised on the images and discriminated on the resulting maps. }
+
+\begin{gather}
+\scriptsize
+\begin{matrix}
+    & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 \\
+1 & 0 &  &  &  &  &  &  &  &  &  \\
+2 & 1.8 & 0 &  &  &  &  &  &  &  &  \\
+3 & 2.6 & 1.7 & 0 &  &  &  &  &  &  &  \\
+4 & 2.4 & 1.0 & 1.0 & 0 &  &  &  &  &  &  \\
+5 & 3.7 & 2.8 & 1.0 & 1.7 & 0 &  &  &  &  &  \\
+6 & 5.0 & 4.3 & 2.2 & 2.9 & 1.2 & 0 &  &  &  &  \\
+7 & 6.9 & 6.3 & 3.6 & 4.4 & 2.5 & 1.3 & 0 &  &  &  \\
+8 & 8.9 & 8.3 & 4.9 & 5.7 & 3.6 & 2.3 & 1.0 & 0 &  &  \\
+9 & 10.0 & 9.4 & 5.6 & 6.4 & 4.4 & 3.0 & 1.8 & 1.0 & 0 &  \\
+10 & 8.6 & 8.1 & 5.4 & 6.0 & 4.4 & 3.3 & 2.4 & 1.9 & 1.2 & 0 \\              
+\end{matrix}
+\end{gather}
+
+\begin{figure}[H]
+  \centering
+  \begin{tabular}[b]{c}
+    \includegraphics[width=3.9cm]{Fig_02a.jpg} \\
+    \small (a)
+  \end{tabular}
+  \begin{tabular}[b]{c}
+    \includegraphics[width=3.9cm]{Fig_02b.jpg} \\
+    \small (b)
+  \end{tabular}
+  \begin{tabular}[b]{c}
+    \includegraphics[width=3.9cm]{Fig_02c.jpg} \\
+    \small (c)
+     \end{tabular}
+    \begin{tabular}[b]{c}
+    \includegraphics[width=3.9cm]{Fig_02d.jpg} \\
+    \small (d)
+  \end{tabular}
+  \caption{Unsupervised automatic classification using clustering and maximal likelihood approaches, and computed rejection probability classes by GRASS GIS: \textbf{(a)}: Classification 2013; \textbf{(b)}: Classification 2023; \textbf{(c)}: Accuracy assessment: 2013; \textbf{(d)}: Accuracy assessment: 2023.}
+  \label{fig02}
+\end{figure}
+
+The land cover types in the northern Egypt were identified \hl{using reports from previous existing studies and existing data. These were modified and generalised according to the current study area. For this purpose, land cover type were proposed for the study area with ten categories adopted from the existing classification scheme. As a result, }the\hl{ }landscape types around the Nile Delta and Faiyum Oasis \hl{were classified and grouped in these classes}:  1) urban areas, 2) agricultural fields, 3) water areas in the Nile river and Mediterranean Sea, 4) coastal shelf zones, 5) consolidated base lands and soils; 6) sandy areas in the desert; 7) natural vegetation in the non-urban areas; 8) croplands; 9) salt; 10) sabkha. \hl{The identification of these land cover types was then performed automatically using computer vision and ML algorithms embedded in the GRASS GIS.}  
+
+Accordingly, the computed class separability matrix for 10 classes of the land cover types recognised in image on 2023 is given in matrix block below:  
+
+\begin{gather}
+\scriptsize
+\begin{matrix}
+    & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 \\
+1 & 0 &  &  &  &  &  &  &  &  &  \\
+2 & 1.8 & 0 &  &  &  &  &  &  &  &  \\
+3 & 2.8 & 1.8 & 0 &  &  &  &  &  &  &  \\
+4 & 2.6 & 1.0 & 1.1 & 0 &  &  &  &  &  &  \\
+5 & 3.9 & 2.7 & 0.9 & 1.6 & 0 &  &  &  &  &  \\          
+6 & 4.9 & 4.0 & 1.9 & 2.8 & 1.1 & 0 &  &  &  &  \\   
+7 & 6.8 & 5.9 & 3.2 & 4.2 & 2.3 & 1.1 & 0 &  &  &  \\  
+8 & 9.0 & 8.1 & 4.5 & 5.8 & 3.6 & 2.3 & 1.1 & 0 &  &  \\
+9 & 10.0 & 9.1 & 5.3 & 6.5 & 4.4 & 3.0 & 2.0 & 1.0 & 0 &  \\   
+10 & 8.3 & 7.5 & 4.9 & 5.8 & 4.2 & 3.2 & 2.4 & 1.8 & 1.1 & 0 \\      
+\end{matrix}
+\end{gather}
+
+\begin{figure}[H]
+  \centering
+  \begin{tabular}[b]{c}
+    \includegraphics[width=3.9cm]{Fig_03a.jpg} \\
+    \small (a)
+  \end{tabular}
+  \begin{tabular}[b]{c}
+    \includegraphics[width=3.9cm]{Fig_03b.jpg} \\
+    \small (b)
+  \end{tabular}
+  \begin{tabular}[b]{c}
+    \includegraphics[width=3.9cm]{Fig_03c.jpg} \\
+    \small (c)
+     \end{tabular}
+    \begin{tabular}[b]{c}
+    \includegraphics[width=3.9cm]{Fig_03d.jpg} \\
+    \small (d)
+  \end{tabular}
+  \caption{Cartographic visualization of the supervised ML-based classification using four different models of GRASS GIS embedded in r.learn.train' module: \textbf{(a)}: GaussianNB Classifier; \textbf{(b)}: MLP Classifier; \textbf{(c)}: SVC Classifier; \textbf{(d)}: Random Forest Classifier.}
+  \label{fig03}
+\end{figure}
+
+\hl{The class separability matrix indicates the values of the class separation for each of the 10 land cover class. Hence, the values means the distance between the individual classes defined automatically during the iteration process. Below this distance, the categories of land cover types are grouped into one class, which is repeated during the next iterations until the results are optimised. Larger values (over 1.5) indicate the specified distance between the land cover classes, while lower values (0.5 to 1.5) are merged  and the process is repeated. Hence, the percentage of accurately classified images with correctly assigned land cover categories is calculated and summarised in the two matrices for each image showing class separability for the years 2013 and 2023.}
+
+Among the compared outputs, the MLP and SVC Classifiers differ from the Random Forest and Naive Bayes approaches, due to the different approaches (ANN and SVM methods). The map generated using Naive Bayes Classified (Figure \ref{fig03}, a) is comparable with the map based on the Random Forest Classifier (Figure \ref{fig03}, d), while MLP Classifier presented a more generalised map (Figure \ref{fig03}, b) using deep learning network approach. 
+
+Being one of the most efficient inductive learning algorithms of ML in data science, Naive Bayes has advantages in the classification performances among the ML algorithms due to the effects of dependence distribution of nodes within classes and integrated  dependence of all nodes \cite{Zhang2004TheOO}. Hence, the Naive Bayes is optimal if the dependences distribute evenly in classes which is excellently suits to the homogeneous types of landscapes with diversified land cover classes. However, this approach is not optimised for images with high landscape heterogeneity.
+
+The advantages of SVM (Figure \ref{fig03}, c) can be explained by its effectivity in high dimensional datasets which is valuable for satellite images that consists thousands of pixels as cells. In our case, 61,405,182 cells were classified automatically for each band of multispectral Landsat 8\hl{ }OLI/TIRS images with 30-m resolution where each raster image contained 7911 rows and 7762 columns of cells. More specifically, the SVM presents high search accuracy compared to other algorithms after a few iterations. Besides, using SVM is supportive for time series analysis where several satellite images are compared since this method is effective when number of dimensions is larger than samples. This is particular valuable for detecting complex land cover patterns in the regions with high heterogeneity of landscapes, such as mixed areas with urban areas and natural spaces. 
+
+The RF classifier presented the best results compared to the other approaches in the presented maps (Figure \ref{fig03} d). Its superiority is explained by the tuned optimization of the image classification. Using the parameter tuning in GRASS GIS, each node is being split during the construction of a tree with the best split found either from all input pixels of the image or a randomised subset depending on the resolution and extent of the training dataset of the image which depends on the study area and heterogeneity of the visualised landscapes. This randomness aims at decreasing the variance of the RF estimator which allows to overcome overfitting of the individual decision trees with high variance in case of heterogeneous landscapes. The artificially increased randomness of the RF algorithm enables either to decrease the prediction errors of the decision trees or cancel them out, thus making image classification more accurate.
+
+\hl{The validation is based on the statistical analysis performed in GRASS GIS. Thus, for the year of 2013, the final results report convergence=98.3\% and 98.26\% points stable. For the year 2023, the classification results report 98.01\% points stable and convergence=98.0\%. Since the computed accuracy is higher than 80\%, the classification of the multispectral image is performed robustly. Therefore, the application of the ML, as demonstrated in this study, can be advised for similar future studies where image processing is applied for environmental monitoring and mapping.}
+
+\section{Conclusion}
+
+\hl{Nowadays, the important role of programming and ML applications in satellite image analysis is more and more recognised due to the powerful techniques which enable to process images rapidly yet accurately. As a result, modern geoinformatics and RS domain benefit from methods derived from the programming domains, data science, and statistical packages. The use of these tools significantly enriches the cartographic capacities of RS data processing through the advanced methods of modelling and visualization. ML algorithms lead the environmental mapping to a principally novel stage that complements and enhances commonly used traditional GIS methods for RS data processing. With this regards, this paper demonstrated the case of such applications where ML algorithms were applied and compared to address the issue of the effective RS data handling.}
+
+This work demonstrated the examples of the supervised training in ML approaches to geospatial applications. The research evaluated ML algorithms of image classification for improved workflow of image processing and tested their applicability in cartographic works. Four algorithms of ML supervised training were compared using GRASS GIS modules that are based Python's library Scikit-Learn. Based on the maps generated from the processed satellite images four distinct ML approaches of GRASS GIS were compared both for mathematical foundation and graphical output. 
+
+\hl{The insights presented in this paper have shed light on the potential future directions in RS data processing using ML tools integrated with geoinformatics software GRASS GIS. Further advances in cartographic RS data processing in arid areas can be extended to the common in environmental mapping tasks:  droughts, erosion, land suitability for agriculture, etc. Such process affects both natural and social systems, cause damage in infrastructure and disrupt landscapes. Satellite images processed using advanced tools of ML can significantly support geospatial analysis and help to mitigate or prevent risks of natural hazards. Using demonstrated approach, the Research and Development (R\&D) groups integrated into the coastal management can perform the RS-based data analysis using programming and scripting methods.}
+
+\hl{Novel framework of environmental monitoring has an multi- and interdisciplinary profile that combines diverse scientific branches: advanced RS datasets, computer graphics, data science, computing algorithms integrated with GIS methodology or visualization and spatial analysis. Such integrative approaches pave the ways to further development of marine research and open new perspectives of the environmental mapping. In this paper, we demonstrated such integrated study with a case of Faiyum Oasis, Egypt, and discussed practices of RS data processing in geoinformatics for environmental mapping of arid zones. The study was supported by an overview of modern AI and ML methods of RS data processing in modern geoinformation. Hence, the perspectives of the GIS-based integrated use of programming, ML, DL techniques and satellite image analysis were discussed and highlighted. We also provided the most essential descriptions of the novel characteristics of the AI and ML track specifically for RS data analysis. }
+
+\hl{Satellite imagery, geo-information resources and maps are a primary requirement in visualising data in environmental monitoring of arid areas. As demonstrated in this study, the use of the open spatial data, such as multispectral Landsat imagery, is crucial for environmental mapping since they provide reliable information with sufficient spatial coverage. The information obtained from such data can be reused for updated vegetation mapping and operative monitoring to analyse land cover changes. The decisions made based on these datasets include the cost-benefit computations, social-economic analysis, or hazard risk assessment in mixed arid and agricultural areas. In turn, processing multi-temporal time series of satellite images ensures environmental management and assist to mitigate implications for affected ecosystems.}
+
+%% The Appendices part is started with the command \appendix;
+%% appendix sections are then done as normal sections
+\appendix
+
+%% If you have bibdatabase file and want bibtex to generate the
+%% bibitems, please use
+%%
+\bibliographystyle{elsarticle-num} 
+\biboptions{sort&compress}
+\bibliography{Bibliography}
+
+%% else use the following coding to input the bibitems directly in the
+%% TeX file.
+\end{document}
+\endinput
+%%
+%% End of file `elsarticle-template-num.tex'.
