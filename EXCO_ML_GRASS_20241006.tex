@@ -151,16 +151,25 @@ The objective of this study is to investigate the performance of ML and ANN meth
 \section{Image processing}
 
 \subsection{Data}
-The data are presented by the Landsat 8 OLI-TIRS satellite images covering western segment of the Nile Delta and the Faiyum Oasis, upper Egypt in 2013 and 2023 \hl{(Figure)} \ref{fig01}. The images were selected based on their quality, coverage and suitability, and downloaded from the EarthExplorer website: \href{https://earthexplorer.usgs.gov/}{\hl{https://earthexplorer.usgs.gov/}}. 
+The data are presented by the Landsat 8 OLI-TIRS satellite images covering western segment of the Nile Delta and the Faiyum Oasis, upper Egypt in 2013 and 2023 \hl{(Figure)} \ref{fig01}. 
+
+\begin{figure}[H]
+  \centering
+    \includegraphics[width=8.0cm]{Fig_01.jpg} \\
+  \caption{\hl{Location of the study area (rotated red square) on the topographic map of Egypt: western Nile Delta and the Faiyum Oasis. Map source: author.}}
+  \label{fig01}
+\end{figure}
+
+The images were selected based on their quality, coverage and suitability, and downloaded from the EarthExplorer website: \href{https://earthexplorer.usgs.gov/}{\hl{https://earthexplorer.usgs.gov/}}. 
 
 \begin{figure}[H]
   \centering
   \begin{tabular}[b]{c}
-    \includegraphics[width=3.9cm]{Fig_01a.jpg} \\
+    \includegraphics[width=3.9cm]{Fig_02a.jpg} \\
     \small (a)
   \end{tabular}
   \begin{tabular}[b]{c}
-    \includegraphics[width=3.9cm]{Fig_01b.jpg} \\
+    \includegraphics[width=3.9cm]{Fig_02b.jpg} \\
     \small (b)
   \end{tabular}
   \caption{Data sources: Landsat 8 OLI/TIRS images on western Nile Delta and the Faiyum Oasis, Egypt: \textbf{(a)}: July 2013; \textbf{(b)}: July 2023.}
@@ -342,19 +351,19 @@ The cartographic visualization of the images processed with four methods is pres
 \begin{figure}[H]
   \centering
   \begin{tabular}[b]{c}
-    \includegraphics[width=3.9cm]{Fig_02a.jpg} \\
+    \includegraphics[width=3.9cm]{Fig_03a.jpg} \\
     \small (a)
   \end{tabular}
   \begin{tabular}[b]{c}
-    \includegraphics[width=3.9cm]{Fig_02b.jpg} \\
+    \includegraphics[width=3.9cm]{Fig_03b.jpg} \\
     \small (b)
   \end{tabular}
   \begin{tabular}[b]{c}
-    \includegraphics[width=3.9cm]{Fig_02c.jpg} \\
+    \includegraphics[width=3.9cm]{Fig_03c.jpg} \\
     \small (c)
      \end{tabular}
     \begin{tabular}[b]{c}
-    \includegraphics[width=3.9cm]{Fig_02d.jpg} \\
+    \includegraphics[width=3.9cm]{Fig_03d.jpg} \\
     \small (d)
   \end{tabular}
   \caption{Unsupervised automatic classification using clustering and maximal likelihood approaches, and computed rejection probability classes by GRASS GIS: \textbf{(a)}: Classification 2013; \textbf{(b)}: Classification 2023; \textbf{(c)}: Accuracy assessment: 2013; \textbf{(d)}: Accuracy assessment: 2023.}
@@ -385,19 +394,19 @@ Accordingly, the computed class separability matrix for 10 classes of the land c
 \begin{figure}[H]
   \centering
   \begin{tabular}[b]{c}
-    \includegraphics[width=3.9cm]{Fig_03a.jpg} \\
+    \includegraphics[width=3.9cm]{Fig_04a.jpg} \\
     \small (a)
   \end{tabular}
   \begin{tabular}[b]{c}
-    \includegraphics[width=3.9cm]{Fig_03b.jpg} \\
+    \includegraphics[width=3.9cm]{Fig_04b.jpg} \\
     \small (b)
   \end{tabular}
   \begin{tabular}[b]{c}
-    \includegraphics[width=3.9cm]{Fig_03c.jpg} \\
+    \includegraphics[width=3.9cm]{Fig_04c.jpg} \\
     \small (c)
      \end{tabular}
     \begin{tabular}[b]{c}
-    \includegraphics[width=3.9cm]{Fig_03d.jpg} \\
+    \includegraphics[width=3.9cm]{Fig_04d.jpg} \\
     \small (d)
   \end{tabular}
   \caption{Cartographic visualization of the supervised ML-based classification using four different models of GRASS GIS embedded in r.learn.train' module: \textbf{(a)}: GaussianNB Classifier; \textbf{(b)}: MLP Classifier; \textbf{(c)}: SVC Classifier; \textbf{(d)}: Random Forest Classifier.}
