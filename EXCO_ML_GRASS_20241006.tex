@@ -179,14 +179,14 @@ The data are presented by the Landsat 8 \hl{Operational Land Imager (OLI) and Th
 \begin{figure}[H]
   \centering
   \begin{tabular}[b]{c}
-    \includegraphics[width=3.9cm]{Fig_02a.jpg} \\
+    \includegraphics[width=6cm]{Fig_02a.jpg} \\
     \small (a)
   \end{tabular}
   \begin{tabular}[b]{c}
-    \includegraphics[width=3.9cm]{Fig_02b.jpg} \\
+    \includegraphics[width=6cm]{Fig_02b.jpg} \\
     \small (b)
   \end{tabular}
-  \caption{Data sources: Landsat 8 OLI/TIRS images on western Nile Delta and the Faiyum Oasis, Egypt: \textbf{(a)}: July 2013; \textbf{(b)}: July 2023.}
+  \caption{Data sources: Landsat 8 OLI/TIRS \hl{multispectral satellite }images \hl{covering} western Nile Delta and the Faiyum Oasis, Egypt: \textbf{(a)}: July 2013; \textbf{(b)}: July 2023. \hl{Major geographic features are annotated on the images.}}
   \label{fig02}
 \end{figure}
 
@@ -339,9 +339,7 @@ The application of RF in image processing consists in selecting a random pixel f
 
 \section{Results and discussion}
 
-The results of the unsupervised automatic classification of the images using clustering and maximal likelihood approaches are presented in Figure \ref{fig04}. It also shows the computed rejection probability classes by GRASS GIS visualization of the processed images. The computed class separability matrix for 10 classes of land cover types identified on the image on 2013 is given in matrix block below. The results of the MaxLike unsupervised classification were employed as seed training dataset for ML algorithms. The classification for 2013 reported 98.26\% points stable in 10 classes; the classification for 2013 reported 98.01\% points stable points stable. 
-
-The cartographic visualization of the images processed with four methods is presented in Figure \ref{fig04}. An essential point when classifying satellite image consists in the accurate selection of the land cover categories which should be identified, recognised on the images and discriminated on the resulting maps.
+The results of the unsupervised automatic classification of the images using clustering and maximal likelihood approaches are presented in Figure \ref{fig04}. It also shows the computed rejection probability classes by GRASS GIS visualization of the processed images. The computed class separability matrix for 10 classes of land cover types identified on the image on 2013 is given in matrix block below. 
 
 \begin{gather}
 \scriptsize
@@ -382,9 +380,7 @@ The cartographic visualization of the images processed with four methods is pres
   \label{fig03}
 \end{figure}
 
-The land cover types in the northern Egypt were identified using reports from previous existing studies and existing data. These were modified and generalised according to the current study area. For this purpose, land cover type were proposed for the study area with ten categories adopted from the existing classification scheme. As a result, the landscape types around the Nile Delta and Faiyum Oasis were classified and grouped in \hl{the ten} classes\hl{. }The identification of these land cover types was then performed automatically using computer vision and ML algorithms embedded in the GRASS GIS.  
-
-The class separability matrix indicates the values of the class separation for each of the 10 land cover class. Hence, the values means the distance between the individual classes defined automatically during the iteration process. Below this distance, the categories of land cover types are grouped into one class, which is repeated during the next iterations until the results are optimised. Larger values (over 1.5) indicate the specified distance between the land cover classes, while lower values (0.5 to 1.5) are merged  and the process is repeated. Hence, the percentage of accurately classified images with correctly assigned land cover categories is calculated and summarised in the two matrices for each image showing class separability for the years 2013 and 2023. \hl{The} computed class separability matrix for 10 classes of the land cover types recognised in image on 2023 is given in matrix block below:  
+The results of the MaxLike unsupervised classification were employed as seed training dataset for ML algorithms. The classification for 2013 reported 98.26\% points stable in 10 classes; the classification for 2013 reported 98.01\% points stable points stable. The cartographic visualization of the images processed with four methods is presented in Figure \ref{fig04}. An essential point when classifying satellite image consists in the accurate selection of the land cover categories which should be identified, recognised on the images and discriminated on the resulting maps. \hl{The} computed class separability matrix for 10 classes of the land cover types recognised in image on 2023 is given in matrix block below:  
 
 \begin{gather}
 \scriptsize
@@ -424,6 +420,10 @@ The class separability matrix indicates the values of the class separation for e
   \caption{Cartographic visualization of the supervised ML-based classification using four different models of GRASS GIS embedded in r.learn.train' module: \textbf{(a)}: GaussianNB Classifier; \textbf{(b)}: MLP Classifier; \textbf{(c)}: SVC Classifier; \textbf{(d)}: Random Forest Classifier.}
   \label{fig04}
 \end{figure}
+
+The class separability matrix indicates the values of the class separation for each of the 10 land cover class. Hence, the values means the distance between the individual classes defined automatically during the iteration process. Below this distance, the categories of land cover types are grouped into one class, which is repeated during the next iterations until the results are optimised. Larger values (over 1.5) indicate the specified distance between the land cover classes, while lower values (0.5 to 1.5) are merged  and the process is repeated. Hence, the percentage of accurately classified images with correctly assigned land cover categories is calculated and summarised in the two matrices for each image showing class separability for the years 2013 and 2023.
+
+The land cover types in the northern Egypt were identified using reports from previous existing studies and existing data. These were modified and generalised according to the current study area. For this purpose, land cover type were proposed for the study area with ten categories adopted from the existing classification scheme. As a result, the landscape types around the Nile Delta and Faiyum Oasis were classified and grouped in \hl{the ten} classes\hl{. }The identification of these land cover types was then performed automatically using computer vision and ML algorithms embedded in the GRASS GIS.  
 
 Among the compared outputs, the MLP and SVC Classifiers differ from the \hl{RF} and \hl{NB} approaches, due to the different approaches (ANN and SVM methods). The map generated using Naive Bayes Classified (Figure \ref{fig04}, a) is comparable with the map based on the \hl{RF} Classifier (Figure \ref{fig04}, d), while MLP Classifier presented a more generalised map (Figure \ref{fig04}, b) using deep learning network approach. 
 
