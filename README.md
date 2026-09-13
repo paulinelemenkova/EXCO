@@ -8,3 +8,8 @@ LaTeX source for the peer-reviewed article by Polina Lemenkova.
 
 ## Citation
 Lemenkova, P. Automation of Image Processing Through ML Algorithms of GRASS GIS Using Embedded Scikit-Learn Library of Python. *Examples and Counterexamples* **2025**, *7*, 100180. https://doi.org/10.1016/j.exco.2025.100180
+
+## Code
+
+The GRASS GIS scripts used to produce the results in this article are available at:
+https://github.com/paulinelemenkova/grass-ml-landcover-egypt
